@@ -1,0 +1,68 @@
+﻿Dev Document
+
+What is important to track; what do players find hard/tedious to calculate? I don't think actual
+combat mechanics is too important. Equipment and modifiers might be more pertinent.
+Building spells might be most important one. Creating a personalised spell list and getting the full effect
+calculated sounds powerful.
+
+* Display total calculated dmg/armour/init/AP modifiers
+
+
+Naming conventions:
+
+* Intelligence will always be "Intellect". Never Intelligence!
+
+Structures:
+* GetComponent in Awake.
+* Initialize lists and Dictionaries in Awake.
+* Change stats earliest in Start.
+
+TODO:
+
+* Ability system
+	* What can a character actually do?
+	* Simplest version: A list of descriptions of Actions.
+
+* Equipment system
+	* SO ✅
+	* Calculate modifiers
+* Magic System
+	* SO ✅
+	* Calculate total damage ✅
+* Augmentations
+	* Write enum list?
+* Archetypes
+	* Core Skills
+		* Decide Starting values (Noticed Health can get as low as 4)
+
+
+* General
+	* Death Save screen
+		* Build logic
+		* 
+	* Action Points
+		* Generate AP
+		* Turns
+				* Button to Start and End turn.
+				* Using AP (Disable skills based on AP available. Button to spend and regain AP (and/or regain on turn))
+				* Selecting Abilities, display AP cost etc
+				* 
+	* Skill point distribution
+		* Random generation ✅
+		* Manual assignment of base stats and Skill Values
+			* Assign rolled values
+			* Assign from point pool
+
+
+
+* Magic
+	* Spell System ✅
+	
+	* Spell UI
+		* Display icons when creating a spell ✅
+		* Save spell to Spell Book
+			* Use spell from Spell Book 
+		* Display number of dice and potential damage
+
+			
+

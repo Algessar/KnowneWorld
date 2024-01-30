@@ -1,0 +1,9 @@
+Scriptable Objects
+
+Weapons
+Augments/other skills?
+
+
+SpellSO's
+Base system figured out now.
+Next I need to make new lists by pressing a button (Create New Spell), so we can have different ones.
