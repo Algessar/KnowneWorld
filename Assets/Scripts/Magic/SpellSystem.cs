@@ -6,9 +6,9 @@ public class SpellSystem : MonoBehaviour
 {
     
     SpellCraftingUI spellCraftingUI;
-    public Dictionary<string, EffectWordSO> effectWordDictionary = new Dictionary<string, EffectWordSO>();
+    public Dictionary<string, SOEffectWord> effectWordDictionary = new Dictionary<string, SOEffectWord>();
 
-    [SerializeField] private EffectWordSO[] effectWords;  // Drag-and-drop your SO instances in the Inspector
+    [SerializeField] private SOEffectWord[] effectWords;  // Drag-and-drop your SO instances in the Inspector
 
     public int _totalDamage;
 
@@ -20,7 +20,7 @@ public class SpellSystem : MonoBehaviour
 
     private void PopulateDictionary()
     {
-        foreach (EffectWordSO effectWord in effectWords)
+        foreach (SOEffectWord effectWord in effectWords)
         {
             if (!effectWordDictionary.ContainsKey(effectWord._effectWord))
             {
@@ -32,7 +32,7 @@ public class SpellSystem : MonoBehaviour
             }
         }
     }
-    public Dictionary<string, EffectWordSO> GetEffectWordDictionary()
+    public Dictionary<string, SOEffectWord> GetEffectWordDictionary()
     {
         return effectWordDictionary;
     }
@@ -42,7 +42,7 @@ public class SpellSystem : MonoBehaviour
     public void CalculateSpellDamage()
     {
         int totalDamage = 0;
-        foreach (EffectWordSO effectWord in spellCraftingUI._selectedEffectWords)
+        foreach (SOEffectWord effectWord in spellCraftingUI._selectedEffectWords)
         {
             //Get variables
             for(int i = 0; i < effectWord._diceAmount; i++)

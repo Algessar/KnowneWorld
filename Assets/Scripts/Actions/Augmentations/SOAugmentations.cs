@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class SO_Augmentations : ScriptableObject
+public class SOAugmentations : ScriptableObject
 {
     
     public string _name = string.Empty;
@@ -11,6 +11,8 @@ public class SO_Augmentations : ScriptableObject
     public string _mainDescription = string.Empty;
 
     ScriptableObject _actionToModify;
+    public int _actionModifier;
+
 
     public int _rank = 0;
     public string _descriptionRank1 = string.Empty;

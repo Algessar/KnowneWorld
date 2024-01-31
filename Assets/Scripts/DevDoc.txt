@@ -66,3 +66,7 @@ TODO:
 
 			
 
+NPC's:
+
+* Creating NPCs: Should I just use Character for this? That is probably the simplest, and would make sense. There is no Hero Character 
+in the Knowne World; any player is just like anyone else, just distinguished by their feats.

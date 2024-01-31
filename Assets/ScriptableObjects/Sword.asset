@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Longsword
   _prefab: {fileID: 0}
-  _itemType: 1
+  _itemType: 2
   _description: 
   _equipmentType: 1
   _armourValue: 0

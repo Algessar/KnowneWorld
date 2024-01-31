@@ -5,13 +5,15 @@ using TMPro;
 
 public class SpellCraftingUI : MonoBehaviour
 {
+    //TODO: Link this whole system together with Archetype Magic.
+
     SpellSystem _spellSystem;
 
     public TMP_Dropdown _effectWordDropdown;
     public Button _addEffectButton;
 
-    public Dictionary<string, EffectWordSO> _effectWordDictionary;
-    public List<EffectWordSO> _selectedEffectWords = new List<EffectWordSO>();
+    public Dictionary<string, SOEffectWord> _effectWordDictionary;
+    public List<SOEffectWord> _selectedEffectWords = new List<SOEffectWord>();
 
     public TextMeshProUGUI _spellDamageText;
     public TextMeshProUGUI _displayDiceToRoll;
@@ -30,7 +32,7 @@ public class SpellCraftingUI : MonoBehaviour
         UpdateSpellCraftUI();
     }
 
-    public void SetEffectWordDictionary( Dictionary<string, EffectWordSO> dictionary )
+    public void SetEffectWordDictionary( Dictionary<string, SOEffectWord> dictionary )
     {
         if(dictionary == null)
         {
@@ -49,7 +51,7 @@ public class SpellCraftingUI : MonoBehaviour
     {
         string selectedEffectWordKey = _effectWordDropdown.options[_effectWordDropdown.value].text;
 
-        if (_effectWordDictionary.TryGetValue(selectedEffectWordKey, out EffectWordSO selectedEffectWord))
+        if (_effectWordDictionary.TryGetValue(selectedEffectWordKey, out SOEffectWord selectedEffectWord))
         {
             // Check if the selected Effect Word is not already in the list
             if (!_selectedEffectWords.Contains(selectedEffectWord))
@@ -85,7 +87,7 @@ public class SpellCraftingUI : MonoBehaviour
 
         //_displayDiceToRoll.text = new string( _spellDamageText.text ); // temp lololol
     }
-    private void DisplaySpellIcon( EffectWordSO selectedSpell, int index )
+    private void DisplaySpellIcon( SOEffectWord selectedSpell, int index )
     {        
         
         if(index < _displaySpellIcons.Length)

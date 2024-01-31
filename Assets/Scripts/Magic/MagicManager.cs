@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ManageMagic : MonoBehaviour
+public class MagicManager : MonoBehaviour
 {
   
     private SpellSystem spellSystem;
