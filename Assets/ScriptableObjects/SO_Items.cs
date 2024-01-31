@@ -18,7 +18,16 @@ public class SO_Items : ScriptableObject
         [TextArea(7, 20)]
         public string _description;
 
+        public string _magicalEffect;
+        ScriptableObject _SOMagicEffect;
 
 
-    }
+        void MagicalItem()
+        {
+            if (_SOMagicEffect != null)
+            {
+
+            }
+        }
+    }    
 }

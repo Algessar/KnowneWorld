@@ -8,8 +8,6 @@ public class StatCreator : MonoBehaviour
     public SOStatData statData;
     public SOArchetypeData archetypeData;
     public SOCoreSkillData coreSkillData;
-    
-
     public List<Stat> PopulateStatList()
     {
         statList.Clear();
@@ -21,6 +19,7 @@ public class StatCreator : MonoBehaviour
         }
         return statList;
     }
+    
     public List<Stat> PopulateArchetypeList()
     {
         statList.Clear();

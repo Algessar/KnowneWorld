@@ -21,6 +21,8 @@ public class EquipmentObject : ItemSO
     public int _modifier2;
     public int _modifier3;
 
+
+
     private void Awake()
     {
         _itemType = ItemType.Equipment;

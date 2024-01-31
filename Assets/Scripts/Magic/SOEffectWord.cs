@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "New Effect Word", menuName = "Magic/Effect Word")]
+[CreateAssetMenu(fileName = "New EffectWord", menuName = "Magic/New EffectWord")]
 public class SOEffectWord : ScriptableObject
 {
-    public string _name = string.Empty; // I can probably remove this
+    //public string _name = string.Empty; // I can probably remove this
     public string _effectWord; // string for internal use
     public int _diceAmount = 0;
     public string _displayDiceSize = "D"; // This is meant to be used as a display for those who wants to use physical dice.
@@ -23,7 +23,7 @@ public class SOEffectWord : ScriptableObject
 
     private void Awake()
     {
-        _name = _effectWord;
+       
     }
     public int DiceRoll()
     {

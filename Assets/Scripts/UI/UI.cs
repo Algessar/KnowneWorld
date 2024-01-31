@@ -14,7 +14,7 @@ public class UI : MonoBehaviour
     [Header("Switch Screens")]
     public GameObject _startScreenPanel;
 
-    [Header("Main stats")] 
+    [Header("Main stats")]
 
     public List<TextMeshProUGUI> _displayMainStatsNumbers = new List<TextMeshProUGUI>();
     public TextMeshProUGUI AGI;
@@ -31,22 +31,29 @@ public class UI : MonoBehaviour
     public TextMeshProUGUI APR;
     public TextMeshProUGUI DMG;
 
-    
+
     //[SerializeField] private TextMeshProUGUI _textActionPoints;
     //[SerializeField] private TextMeshProUGUI _texthealth;
     //[SerializeField] private TextMeshProUGUI _textSize;
     //[SerializeField] private TextMeshProUGUI _textTrait;
     public List<TextMeshProUGUI> _secondaryStatsNumbers = new List<TextMeshProUGUI>();
 
+    public GameObject[] panels;
+    private int currentPanelIndex = 0;
+
+
     void Start()
     {
         RandomStats = FindAnyObjectByType<RandomStats>();
         _gameManager = FindAnyObjectByType<GameManager>();
+        _archetypeManager = FindAnyObjectByType<ArchetypeManager>();
 
         //InitializeData();
         //UpdateUI(_archetypeDropdown.options[_archetypeDropdown.value].text);
 
         UpdateScoreText();
+
+        ShowCurrentPanel();
     }
 
     private void Update()
@@ -74,7 +81,7 @@ public class UI : MonoBehaviour
         WIL.text = RandomStats.FindStatValueByName("Will").ToString();
         PER.text = RandomStats.FindStatValueByName("Perception").ToString();
 
-        Size.text = "1"+_gameManager._size.ToString()+"0";
+        Size.text = "1" + _gameManager._size.ToString() + "0";
         APR.text = _gameManager._actionPoints.ToString();
         DMG.text = _gameManager._totalDamage.ToString();
         HP.text = _gameManager._health.ToString();
@@ -83,7 +90,7 @@ public class UI : MonoBehaviour
 
     public void InrementAGI()
     {
-        
+
         if (RandomStats.FindStatValueByName("Agility") > 3) { return; }
         RandomStats.IncrementStat("Agility", 1);
     }
@@ -91,7 +98,7 @@ public class UI : MonoBehaviour
     {
         if (RandomStats.FindStatValueByName("Agility") < -3) { return; }
         RandomStats.DecrementStat("Agility", 1);
-        
+
     }
     public void InrementSTR()
     {
@@ -115,7 +122,7 @@ public class UI : MonoBehaviour
     }
     public void InrementINT()
     {
-        if(RandomStats.FindStatValueByName("Intellect") > 3) { return; }
+        if (RandomStats.FindStatValueByName("Intellect") > 3) { return; }
         RandomStats.IncrementStat("Intellect", 1);
     }
     public void DecrementINT()
@@ -162,6 +169,64 @@ public class UI : MonoBehaviour
         //Call needed functions
         _startScreenPanel.SetActive(false);
 
+    }
+
+    private void ShowCurrentPanel()
+    {
+        // Set all panels inactive
+        foreach (var panel in panels)
+        {
+            panel.SetActive(false);
+        }
+
+        // Set the current panel active
+        panels[currentPanelIndex].SetActive(true);
+    }
+
+    public void SwitchPanelOrToggle()
+    {
+        // Check if all panels are currently active
+        if (AreAllPanelsActive())
+        {
+            // If all panels are active, switch to the next panel
+            SwitchToNextPanel();
+        }
+        else
+        {
+            // If not all panels are active, toggle visibility of all panels
+            ToggleAllPanels();
+        }
+    }
+
+    private void ToggleAllPanels()
+    {
+        // Toggle visibility of all panels
+        foreach (var panel in panels)
+        {
+            panel.SetActive(!panel.activeSelf);
+        }
+    }
+
+    private void SwitchToNextPanel()
+    {
+        // Increment the index and wrap around if needed
+        currentPanelIndex = (currentPanelIndex + 1) % panels.Length;
+
+        // Show the updated panel
+        ShowCurrentPanel();
+    }
+
+    private bool AreAllPanelsActive()
+    {
+        // Check if all panels are currently active
+        foreach (var panel in panels)
+        {
+            if (!panel.activeSelf)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
 

@@ -10,6 +10,7 @@ public class SOStatData : ScriptableObject
 {
     [SerializeField]
     private SerializableDictionary<string, int> statDictionary = new SerializableDictionary<string, int>();
+    
        
     public Dictionary<string, int> GetStatDictionary()
     {

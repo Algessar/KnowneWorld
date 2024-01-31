@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+// Handle Turns
+// 
+
 
 public class GameManager : MonoBehaviour
 {
@@ -83,58 +86,7 @@ public class GameManager : MonoBehaviour
             //Debug.Log("Base Stat List Entry: " + entry);
         }
     } 
-    [System.Serializable]
-    public enum Size
-    {
-        TINY,
-        SMALL,
-        MEDIUM,
-        LARGE,
-        HUGE,
-        GARGANTUAN,
-    }
-    [System.Serializable]
-    public enum PlayerRaces
-    {
-        ELF,
-        HUMAN,
-        HALFLING,
-        GNOME,
-        GOBLIN,
-        DWARF,
-        TROLL,
-    }
-    [System.Serializable]
-    public enum EnemyRaces
-    {
-        DRAGON,
-        TROLL,
-        URUK,
-        GREATBIRD,
-        FACELESS,
-        PALEMAN,
-
-
-    }
-    [System.Serializable]
-    public enum Traits
-    {
-        NIMBLE,
-        BRAWN,
-        STALWART,
-        CLEVER,
-        IRONMIND,
-        OBSERVANT,
-        QUICK,
-        QUICKER,
-        STOUT,
-        IRONSKIN,
-        VIGILANT,
-        TALENTED,
-        DIMINUTIVE,
-        BURLY,
-        INGENIOUS,
-    }
+    
     private void LogList( List<int> list )
     {
         string logString = "List contents: ";
@@ -324,4 +276,59 @@ public class GameManager : MonoBehaviour
         }
         return 0;
     }
+}
+
+[System.Serializable]
+public enum PlayerRaces
+{
+    ELF,
+    HUMAN,
+    HALFLING,
+    GNOME,
+    GOBLIN,
+    DWARF,
+    TROLL,
+}
+
+[System.Serializable]
+public enum Size
+{
+    TINY,
+    SMALL,
+    MEDIUM,
+    LARGE,
+    HUGE,
+    GARGANTUAN,
+}
+
+[System.Serializable]
+public enum EnemyRaces
+{
+    DRAGON,
+    TROLL,
+    URUK,
+    GREATBIRD,
+    FACELESS,
+    PALEMAN,
+
+
+}
+[System.Serializable]
+public enum Traits
+{
+    NIMBLE,
+    BRAWN,
+    STALWART,
+    CLEVER,
+    IRONMIND,
+    OBSERVANT,
+    QUICK,
+    QUICKER,
+    STOUT,
+    IRONSKIN,
+    VIGILANT,
+    TALENTED,
+    DIMINUTIVE,
+    BURLY,
+    INGENIOUS,
 }

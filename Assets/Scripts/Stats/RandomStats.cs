@@ -12,26 +12,16 @@ public class RandomStats : MonoBehaviour
     [SerializeField]
     public List<Stat> statList = new List<Stat>();
 
-    GameManager _gameManager;
-
-
     [SerializeField] StatCreator _statCreator;
 
     bool _canRoll = true;
 
     private void Awake()
-    {
-        
-        _gameManager = GetComponent<GameManager>();
+    {        
         _statCreator = GetComponent<StatCreator>();
         AssignAllRandom();
-        
     }
-    private void Update()
-    {
-
-    }
-    public void AssignAllRandom() //This was Start()
+    public void AssignAllRandom() // public List<> AssignAllRandom(){ return }
     {
         if(!_canRoll)
         {
@@ -187,9 +177,6 @@ public class RandomStats : MonoBehaviour
         }
         return statValue;
     }
-
-
-
 }
 
 
