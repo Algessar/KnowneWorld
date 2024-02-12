@@ -77,6 +77,7 @@ public class SpellCraftingUI : MonoBehaviour
     {
         _spellDamageText.text = _spellSystem._totalDamage.ToString();
         CollectAndDisplaySpellDice(); // TODO: Not implemented CollectAndDisplaySpellDice()
+        // I want to split up arcPower and dice amount. There would be another line of code for calculation, but let me easier display it.
     }
 
     void CollectAndDisplaySpellDice()

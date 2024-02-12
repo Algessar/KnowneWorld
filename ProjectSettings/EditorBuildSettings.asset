@@ -4,5 +4,21 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/WelcomeScreen.unity
+    guid: 76dfe9299d1132a4a8ee59abd7c8f79e
+  - enabled: 1
+    path: Assets/Scenes/Login.unity
+    guid: cf4312b4a9685a247b6639ceb4a03210
+  - enabled: 1
+    path: Assets/Scenes/CharacterSelection.unity
+    guid: 8c8eb1c00eeaa7e4fbf6b3146826aff8
+  - enabled: 1
+    path: Assets/Scenes/PlayerScene.unity
+    guid: 4d7a2aa8648829346ba5069c1870b898
+  - enabled: 1
+    path: Assets/Scenes/GameMasterScene.unity
+    guid: e5f322a96a7fc1d4bb373910da539d43
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

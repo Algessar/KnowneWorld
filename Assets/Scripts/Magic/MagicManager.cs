@@ -9,8 +9,7 @@ public class MagicManager : MonoBehaviour
     private SpellCraftingUI spellCraftingUI;
 
     private void Start()
-    {
-        // Assuming both SpellSystem and SpellCraftingUI are components on the same GameObject
+    {        
         spellSystem = GetComponent<SpellSystem>();
         spellCraftingUI = GetComponent<SpellCraftingUI>();
 

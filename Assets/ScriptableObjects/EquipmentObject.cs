@@ -3,13 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static SO_Items;
 
-public enum EquipmentType
-{
-    Armour,
-    Weapon,
-    Ring,
-    Necklace,
-}
+
 [CreateAssetMenu(fileName = "New Equipment Object", menuName = "Inventory System/Items/Equipment")]
 public class EquipmentObject : ItemSO
 {

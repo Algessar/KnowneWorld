@@ -21,13 +21,5 @@ public class SO_Items : ScriptableObject
         public string _magicalEffect;
         ScriptableObject _SOMagicEffect;
 
-
-        void MagicalItem()
-        {
-            if (_SOMagicEffect != null)
-            {
-
-            }
-        }
     }    
 }

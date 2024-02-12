@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Creatures : MonoBehaviour
+public class Creatures : MonoBehaviour, IUnit, ITargetable
 {
-    // Start is called before the first frame update
-    void Start()
+    public void DealDamage( int damage, int bonusDamage )
     {
-        
+        throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TakeDamage( int damage, int reduction )
     {
-        
+        throw new System.NotImplementedException();
     }
 }

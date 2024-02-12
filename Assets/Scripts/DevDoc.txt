@@ -93,3 +93,60 @@ Perhaps I should make:
 
 
 
+Actions
+	Movement
+		Walk
+		Run
+		Sprint
+		Avoid
+	Melee
+		Attack
+		Parry
+		Block
+		Dodge		
+	Ranged
+		Aim
+		Draw
+		Shoot
+		Reload
+	Magic 
+		Effect Words
+		Runes
+		Sigils
+
+	Powers
+
+
+	-----------------------------------
+
+	Login and character selection
+
+	Login should be it's own separate Scene. So should Character Selection most likely.
+
+	Scene 1:
+		Welcome Screen - Animate something cool?
+	Scene 2:
+		Login - Input
+		login - button
+	Scene 3: Player	
+		New Character - Button
+		Load character - Button
+			Select Character - List
+
+		
+			As Game Master
+				Scene GM
+	
+		
+
+
+
+TGT - targets for constraints (Like the whole DEF hierarchy targeting this layer as separation.)
+
+MCH - has constraints set on them.
+
+	How do we then handle parenting between these bones?
+
+DEF - Deforming bones. Should keep hierarchy.
+
+		

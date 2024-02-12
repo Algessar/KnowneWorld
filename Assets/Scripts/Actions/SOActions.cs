@@ -23,60 +23,9 @@ public class SOActions : ScriptableObject
     public int _totalDamage = 0;
 
     public ActionType _actionType;
-    public MeleeActions _meleeActions;
+    public Actions _meleeActions;
     public RangedActions _rangedActions;
     public Magic _magic;
 
-
-    //These are just a reference of all the Actions available. Might be nice to have actually. Simple way to toggle availability.
-    //if(bowEquipped){RangedActions = true} kinda thing
-
-    public void PerformAction()
-    {
-        Debug.Log("You performed Action: " + _name + "and dealt " + _totalDamage);
-        //You performed "action", roll yDx with "modifier" _archetypeValue + _coreSkillValue;
-        //You performed "action", it was modified by "augment".
-    }
-
-    public enum ActionType
-    {
-        NONE,
-        MELEE,
-        MOVEMENT,
-        GENERAL,
-    }
-
-    public enum MeleeActions
-    {
-        NONE,
-        ATTACK,
-        BLOCK,
-        PARRY,
-        EVADE,
-        FEINT,
-        RIPOSTE,
-        DISARM,
-        CHARGE,
-        SHIELDBASH,
-        MURDERSTROKE,
-        QUICKDRAW
-
-    }
-    public enum RangedActions
-    {
-        NONE,
-        AIM,
-        DRAW,
-        RELOAD,
-
-    }
-
-    public enum Magic
-    {
-        NONE,
-        CASTMAGIC,
-        ACTIVATERUNE,
-        ACTIVATESIGIL,
-    }
 
 }

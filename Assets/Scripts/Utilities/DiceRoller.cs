@@ -11,4 +11,6 @@ public static class DiceRoller
     {
         return Roll(1, _arcpower + 1);
     }
+
+
 }

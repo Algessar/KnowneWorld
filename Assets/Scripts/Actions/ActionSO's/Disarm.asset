@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c51fd7f6b9a328469d8a062816a8821, type: 3}
+  m_Name: Disarm
+  m_EditorClassIdentifier: 
+  _name: 
+  _description: 
+  _type: 
+  _actionPointCost: 1
+  _defaultDieType: 6
+  _diceAmount: 1
+  _range: 1
+  _negativeModifier: 0
+  _positiveModifier: 0
+  _totalDamage: 0
+  _actionType: 1
+  _meleeActions: 0
+  _rangedActions: 0
+  _magic: 0
