@@ -24,21 +24,28 @@ public class DataManager : MonoBehaviour
 
     [Header("Stats")]
     public SOStatData _SOStatData;
-    public SOArchetypeData _SOArchetypeData;
+    public SOSize _SOSize;
+    public List<SOSize> _SOSizeList;
+
+    [HideInInspector] public SOArchetypeData _SOArchetypeData;
 
     public SOArchetypeData[] _SOArchetypes;
 
     [Header("Skills")]
-    public List<SOActions>  _SOActionData;
-    public List<SOAugmentations> _SOAugmentationData;
+    public List<SOActions>  _SOActionData = new List<SOActions>();
+    public List<SOAugmentations> _SOAugmentationData = new List<SOAugmentations>();
+
+    public List<SO_Items> _itemsExistingInWorld; //reference for GM    
 
 }
 
 [System.Serializable]
+
+//TODO: Change all these fucking enums to scriptableObjects
 public enum CharacterRace
 {
-    ELF,
     HUMAN,
+    ELF,
     HALFLING,
     GNOME,
     GOBLIN,

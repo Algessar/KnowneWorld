@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8312220477758930484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 751593189031999476}
+  - component: {fileID: 6027822236767783421}
+  m_Layer: 0
+  m_Name: DataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &751593189031999476
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8312220477758930484}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6027822236767783421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8312220477758930484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 154a5b276ddcce94c81930336fa2ad16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _SOStatData: {fileID: 11400000, guid: a14b75a0d8c0ba345b8579ac04a13631, type: 2}
+  _SOSize: {fileID: 11400000, guid: acfd56e5ef8203048b1a3041b59b2227, type: 2}
+  _SOSizeList: []
+  _SOArchetypeData: {fileID: 11400000, guid: 7ded78d72e3ce854d92830bad3ea6daa, type: 2}
+  _SOArchetypes:
+  - {fileID: 11400000, guid: 7ded78d72e3ce854d92830bad3ea6daa, type: 2}
+  - {fileID: 11400000, guid: a4adbf2adb7d27a46bc92170a5b21435, type: 2}
+  - {fileID: 11400000, guid: 50745e426764f6843a4ec4993911a0d8, type: 2}
+  - {fileID: 11400000, guid: a0412202fdc2dfa4688024c56965c60f, type: 2}
+  - {fileID: 11400000, guid: 46bd76bf0ce654042a7e7059fe41096c, type: 2}
+  - {fileID: 11400000, guid: f2c8abfff75ce5e4ebbae7a3f4b56269, type: 2}
+  - {fileID: 11400000, guid: 0d4ade6139dc3264f974fc7ee60ac4d8, type: 2}
+  - {fileID: 11400000, guid: 829222d7a6e9f45469517dc0594821a9, type: 2}
+  - {fileID: 11400000, guid: 50aceca4c08c2b446b870dbb6ee1da8f, type: 2}
+  - {fileID: 11400000, guid: 42a5d3bc76162304e8814c6eb8e48832, type: 2}
+  - {fileID: 11400000, guid: 5f5d67c6730c46f43804594eefcc434b, type: 2}
+  _SOActionData: []
+  _SOAugmentationData: []
+  _itemsExistingInWorld: []

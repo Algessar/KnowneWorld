@@ -3,35 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEditor.SearchService;
 using UnityEngine.SceneManagement;
+using System.Linq;
+using Unity.VisualScripting;
+
 
 //Rules of thumb: value types that I want to be able to touch as a GM should be here. Like Experience point pool.
-
+[RequireComponent(typeof(CharacterCreator))]
+[RequireComponent(typeof(EquipmentManager))]
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    
+    StatCreator _statCreator;
     CharacterCreator _characterCreator;
     private Character _character;
 
+    [Header("Scene managment")]
 
-    [Header("Login")]
+    public string _sceneWelcomeScreen = "WelcomeScreen";
+    public string _sceneCharacterSelection = "CharacterSelection";
+    public string _sceneLoginScreen = "Login";
+    public string _sceneCharacterCreation = "CharacterCreation";
+    public string _sceneGameMaster = "GameMasterScene";
+    public string _scenePlayer = "PlayerScene";
+
+    [Header("UI")]
+    Canvas _canvas;
+    [SerializeField] Camera _camera;
+
+    [Header("UI/Login")]
     public string loginName;
     public TMP_InputField _accountNameInput;
     public TMP_InputField _accountPasswordInput;
 
-
-    [Header("Scene managment")]
-
-
-    [Header("UI")]
-
+    [Header("UI/Character creation")]
     public string _name;
     public TMP_InputField _nameInputField;
-   // public TextMeshProUGUI _displayName;
-   // public TextMeshProUGUI[] _characterNames;
+
+    public TMP_Dropdown _raceSelectionDropdown;
+    public CharacterRace _currentlySelectedRace;
+    public TMP_Dropdown _sizeSelectionDropdown;
+    public Stat _size;
+    public List<Stat> _sizeList = new List<Stat>();
+    private int _indexSize;
+    public Dictionary<string, int> _sizeDictionary;
+
+
+
 
     [HideInInspector] public TMP_InputField _inputField;
     [HideInInspector] public TextMeshProUGUI _displayHealthText;
@@ -41,8 +60,15 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public TextMeshProUGUI _INTText;
     [HideInInspector] public TextMeshProUGUI _WILLText;
     [HideInInspector] public TextMeshProUGUI _PERText;
+    [Space(5)]
 
-    [Space(9)]   
+    [Header("UI/Action inputs")]
+    public TMP_InputField _dealDamageInput;
+    public TMP_InputField _takeDamageInput;
+
+    public TextMeshProUGUI _showDamageOutput;
+
+    [Space(9)]
 
     [Header("Character List")]
     public GameObject _characterSelectDisplay;
@@ -61,11 +87,65 @@ public class GameManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(this);
+            DontDestroyOnLoad(this.gameObject);
         }
 
-        _characterCreator = GetComponent<CharacterCreator>();        
-    }   
+        _characterCreator = GetComponent<CharacterCreator>(); 
+        _canvas = FindAnyObjectByType<Canvas>();
+        _camera = FindAnyObjectByType<Camera>();
+
+        _canvas.renderMode = RenderMode.ScreenSpaceCamera;
+        _canvas.worldCamera = _camera;
+
+        _sizeSelectionDropdown.gameObject.SetActive(false);
+
+        _statCreator = new StatCreator();
+    }
+
+    private void GameManagerSetup()
+    {
+        _characterSelectDisplay = GameObject.Find("");
+        _dealDamageInput.HasDescriptor();
+        //_dealDamageInput = GameObject.Find("");
+        
+
+    }
+
+    private void Start()
+    {
+        if (_sizeSelectionDropdown != null)
+        {
+            SetSizeDictionary(DataManager.Instance._SOSize.GetSizeDictionary());
+
+            //_sizeSelectionDropdown.onValueChanged.AddListener(OnSizeDropdownValueChanged);
+        }
+        else if (_sizeSelectionDropdown == null)
+        {
+            Debug.LogWarning("Size Selection Dropdown Is Not Assigned");
+        }
+        //_sizeSelection = _statCreator.PopulateSizeList();
+
+        var log = new LogUtilities();
+
+        //log.LogNameAndValue(_sizeSelection);       
+
+        if(_raceSelectionDropdown != null)
+        {
+
+        SelectRace();
+        }
+        else if (_sizeSelectionDropdown == null)
+        {
+            Debug.LogWarning("Race Selection Dropdown Is Not Assigned");
+        }
+
+    }
+    private void Update()
+    {
+        //OnSizeDropdownValueChanged();
+    }
+
+
 
     public void DisplayCharacterList()
     {
@@ -92,32 +172,95 @@ public class GameManager : MonoBehaviour
     public void CreateNewCharacter()
     {
         _characterCreator.CreateCharacter();
-    }    
-
-    void CalculateTotalDamage(int baseDmg, int bonusDmg)
-    {
-       // _totalDamage += baseDmg + bonusDmg;
     }
 
-    void CalculateBonusDamage()
+    public void SelectRace()
     {
+        if(_raceSelectionDropdown != null)
+        {
+        _raceSelectionDropdown.ClearOptions();
+        }
+        int enumValues = System.Enum.GetValues(typeof(CharacterRace)).Length;
 
-        // Requires Core skills being calculated
+        List<TMP_Dropdown.OptionData> data = new List<TMP_Dropdown.OptionData>();
 
-        // _bonusDamageMod = 
-        // Stat mods
-        // Weapon mods
-        // Equipment mods
-        // Augment mods
+        for(int i = 0; i < enumValues; i++)
+        {
+            TMP_Dropdown.OptionData newData = new TMP_Dropdown.OptionData();
+            newData.text = ((CharacterRace)i).ToString();
+            data.Add(newData);
+        }
+        _raceSelectionDropdown.AddOptions(data);
+        
+        //OnRaceDropdownValueChanged(0);
+        
+
     }
+
+    public void OnRaceDropdownValueChanged()
+    {
+        string selectedText = _raceSelectionDropdown.options[_raceSelectionDropdown.value].text;
+
+        CharacterRace selectedRace;
+        if (System.Enum.TryParse(selectedText, out selectedRace))
+        {
+            _currentlySelectedRace = selectedRace;
+            Debug.Log("Currently selected race: " + _currentlySelectedRace);
+        }
+        else
+        {
+            Debug.LogWarning("Failed to parse selected race: " + selectedText);
+        }
+
+        
+    }
+
+    public void SetSizeDictionary(Dictionary<string, int> dictionary )
+    {
+        _sizeDictionary = dictionary;
+
+        
+        _sizeSelectionDropdown.ClearOptions();
+        _sizeSelectionDropdown.AddOptions(new List<string>(_sizeDictionary.Keys));       
+        
+
+    }
+
+   // public void OnSizeDropdownValueChanged(int index)
+   // {
+   //     index = _sizeSelectionDropdown.value;
+   //     string selectedSizeKey = _sizeSelectionDropdown.options[index].text;
+   //     
+   //     if (_sizeDictionary.TryGetValue(selectedSizeKey, out int selectedSizeValue))
+   //     {
+   //         // Handle the selected size value (e.g., update UI, perform actions)
+   //         //Debug.Log($"Selected Size: {selectedSizeKey} - Value: {selectedSizeValue}");
+   //
+   //         
+   //         _character._size = SetSize(selectedSizeKey, selectedSizeValue);
+   //         _sizeList = _statCreator.PopulateSizeList(_character._sizeList);
+   //         var log = new LogUtilities();
+   //         log.LogNameAndValue(_sizeList);
+   //         //SetSize(selectedSizeKey, selectedSizeValue);
+   //     }
+   //     else
+   //     {
+   //         Debug.LogWarning($"Selected size key '{selectedSizeKey}' not found in the dictionary.");
+   //     }
+   // }
+
+
+    private Stat SetSize(string key, int value)
+    {
+        _size.statName = key;
+        _size.value = value;
+        return _size;
+    }
+
+
     public int IncrementCoreSkillValues( int coreSkill ){ return coreSkill += 1; }
     public int DecrementCoreSkillValue( int coreSkill ) {  return coreSkill -= 1; }
 
-    public int DiceRoll( int maxValue )
-    {
-        int result = UnityEngine.Random.Range(1, maxValue + 1);
-        return result;
-    }
     public int IncrementStat( string name, int incrementValue ) //This function does not work as expected
     {
         Stat statToIncrement = _character._statList.Find(stat => stat.statName == name);
@@ -147,33 +290,40 @@ public class GameManager : MonoBehaviour
 
     public void ToLoginScene()
     {
-        SceneManager.LoadScene("Login");
+        SceneManager.LoadScene(_sceneLoginScreen);
     }
     public void ToCharacterSelectionScene()
-    {
-        if (_accountNameInput.text == "TestPlayer")
-        {            
-            if (_accountPasswordInput.text == "Master")
-            {
-                SceneManager.LoadScene("CharacterSelection");
-            }
-        }
+    {        
+        SceneManager.LoadScene(_sceneCharacterSelection);       
+    }
+    public void ToCharacterCreationScene()
+    {        
+        SceneManager.LoadScene(_sceneCharacterCreation);        
     }
     public void ToGMScene()
     {
-        if (_accountNameInput.text == "Master")
-        {
-            if (_accountPasswordInput.text == "Master")
-            {
-                SceneManager.LoadScene("GameMasterScene");
-            }
+        if (_accountNameInput.text == "Master" && _accountPasswordInput.text == "Master")
+        {           
+            SceneManager.LoadScene(_sceneGameMaster);            
         }
     }
     public void ToPlayerScene()
     {
-        SceneManager.LoadScene("PlayerScene");
+        Debug.Log("LOGIN was pressed");
+        if (_accountNameInput.text == "Test" && _accountPasswordInput.text == "Test")
+        {
+            
+            
+            Debug.Log("Login was pressed and should change scene");
+            SceneManager.LoadScene(_scenePlayer);
+            
+        }
     }
 
+    public void ToWelcomeScene()
+    {
+        SceneManager.LoadScene(_sceneWelcomeScreen);
+    }
     #endregion
 
     #region Utilities

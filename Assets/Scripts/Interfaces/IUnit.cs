@@ -1,6 +1,6 @@
 public interface IUnit
 {
-    public void DealDamage(int damage, int bonusDamage);
-    public void TakeDamage(int damage, int reduction);
+    public abstract void DealDamage(int damage, int bonusDamage);
+    public abstract void TakeDamage(int damage, int reduction);
 
 }

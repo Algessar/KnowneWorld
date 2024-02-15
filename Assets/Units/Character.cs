@@ -1,13 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
 [System.Serializable]
-public class Character : Actions, IUnit, ITargetable
+public class Character : Actions, ITargetable //IUnit
 {
-    RandomStats _randomStats = new RandomStats();  
+    RandomStats _randomStats = new RandomStats();
+    StatCreator _statCreator;
 
     public string _playerName;
     public string _name;
@@ -21,8 +24,10 @@ public class Character : Actions, IUnit, ITargetable
 
     public List<Stat> _statList;
     public List<Stat> _archetypeList;
+    public List<SOArchetypeData> _archetypeDataList = new List<SOArchetypeData>();
+
     [Space (20)]
-        
+
     [Header("Actions")]
     private int _baselineAPR = 3;
     public int _actionPoints;
@@ -49,43 +54,66 @@ public class Character : Actions, IUnit, ITargetable
     public int _magicalProtection = 0;
 
     [Header("Secondary/Traits")]
-    public int _size;
     public CharacterRace _characterRace;
-    public Size _sizeEnum;
+
+    public int _size;
+    public List<Stat> _sizeList = new List<Stat>();
     public List<Traits> _characterTraits = new List<Traits>();
 
     [Header("Inventory")]
-    public List<SO_Items> _items;
+    public List<SOEquipmentObject> _itemsInInventory;
+    public List<SOEquipmentObject> _equippedItems;
 
     [Header("UI")]
     public GameObject _characterPortrait; //gameObject.GetComponent<Image>();
     public Character( )
     {
         this._playerName = "";
-        this._name = "";
+        this._name = "";       
 
         _randomStats = new RandomStats();
-
+        _statCreator = new StatCreator();
+        
     }
     public void OnCharacterCreated()
     {
         if (this != null)
         {
-            Debug.Log("A character with name " + _name + " has been created.");
+            Debug.Log("A character with name ´" + _name + "´ has been created.");
         }
         CharacterSetup();
-       
     }
-    public void CharacterSetup()
+    private void CharacterSetup()
     {
         _statList = _randomStats.AssignAllRandom();
-        //TraitsManager.Instance.CalculateRaceModifiers(this, _characterRace, _size);
-        //TraitsManager.Instance.CalculateSizeModifiers(_sizeEnum, _bonusDamageMod, _maxWalkDistance);
-        CalculateActionPoints();
-     //   CalculateMaxHealth(); //TODO: Not implemented CalculateMaxHealth();
-
         _actionList = DataManager.Instance._SOActionData;
-        
+        //_sizeList.value = GameManager.Instance._size;        
+        MergeArchetypeLists();
+        //CalculateActionPoints();
+
+        int test = FindStatValueByName(_archetypeList, "Distillation");       
+    }
+
+    public List<SOArchetypeData> FillArchetypeList()
+    {
+        var Archetypes = DataManager.Instance._SOArchetypes;
+        foreach (var archetype in Archetypes)
+        {
+            _archetypeDataList.Add(archetype);
+        }        
+        return _archetypeDataList;
+    }
+
+    void MergeArchetypeLists()
+    {
+        _archetypeList = new List<Stat>();
+        _archetypeList.Clear(); // Clear the existing list before populating it again
+
+        foreach (var archetypeData in _archetypeDataList)
+        {
+            List<Stat> statsFromArchetype = _statCreator.PopulateArchetypeList(archetypeData);
+            _archetypeList.AddRange(statsFromArchetype);
+        }
     }
     public int CalculateActionPoints()
     {
@@ -95,16 +123,29 @@ public class Character : Actions, IUnit, ITargetable
         return _actionPoints += temp;
     }
 
-    public void CalculateMaxHealth()
-    {
-        _maxHealth = 0;
-        int calculatedSize = 0;
-        _maxHealth = 10 + _size + this.FindStatValueByName(_archetypeList, "Athletics") + this.FindStatValueByName(_statList, "Stamina");
-        //calculatedSize = 10 + _size;
 
-        _currentHealth = _maxHealth;
+    private int CalculateMeleeBaseDamage(string _coreValue)
+    {
+        _totalDamage += this.FindStatValueByName(_archetypeList, _coreValue); //TODO: Character: Damage: How do I make this modular?
+        _totalDamage += _bonusDamageMod;
+
+        return _totalDamage;
+
     }
 
+    public int CalculateTotalDamage(int weaponListIndex, string corevalue)
+    {
+        //equipped weapon
+        //stat bonuses
+        _itemsInInventory.GetRange(weaponListIndex, 1);
+        
+        
+         int baseDamage = CalculateMeleeBaseDamage(corevalue);
+         int totalWeaponDamage = _itemsInInventory[weaponListIndex].GetTotalDamage();
+         _totalDamage += baseDamage + totalWeaponDamage;
+        
+        return _totalDamage;
+    }
 
     // Functionality for using skills
     // Functionality for using magic
@@ -132,15 +173,22 @@ public class Character : Actions, IUnit, ITargetable
         }
         return 0;
     }
-    public void TakeDamage( int damage, int reduction )
-    {   
+    public  void TakeDamage( int damage, int reduction )
+    {
+        string dmgString = GameManager.Instance._takeDamageInput.text;        
+        damage = dmgString.ConvertTo<int>();
         _currentHealth -= damage;
 
 
     }
-    public void DealDamage( int damage, int bonusDamage )
+    public  void DealDamage( int bonusDamage )
     {
-        throw new NotImplementedException();
+        string dmgString = GameManager.Instance._dealDamageInput.text;
+        int damage = dmgString.ConvertTo<int>();
+        damage += _bonusDamageMod;       
+
+        GameManager.Instance._showDamageOutput.text = damage.ToString();
+        
     }
 
     #region Utilities/Search
@@ -153,6 +201,7 @@ public class Character : Actions, IUnit, ITargetable
             Stat statToFind = statList.Find(stat => stat.statName == name);
             statValue = statToFind.value;
         }
+        Debug.Log("Showing stat value for " + name + ": " + statValue);
         return statValue;
     }
 

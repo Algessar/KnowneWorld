@@ -19,7 +19,7 @@ public class SO_Items : ScriptableObject
         public string _description;
 
         public string _magicalEffect;
-        ScriptableObject _SOMagicEffect;
+        public ScriptableObject _SOMagicEffect;
 
     }    
 }

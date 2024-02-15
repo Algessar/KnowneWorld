@@ -28,5 +28,29 @@ public class StatCreator
             statList.Add(newStat);
         }
         return statList;
-    }   
+    }
+    public List<Stat> PopulateArchetypeList( SOArchetypeData archetypeData )
+    {
+        statList.Clear(); // Clear the list before populating it again
+
+        foreach (var kvp in archetypeData.GetArchetypeDictionary())
+        {
+            Stat newStat = new Stat((int)kvp.Value, kvp.Key);
+            statList.Add(newStat);
+        }
+
+        return statList;
+    }
+    public List<Stat> PopulateSizeList(Stat newSize)
+    {
+        var sizeData = DataManager.Instance._SOSize;
+        statList.Clear();
+
+        foreach (var kvp in sizeData.GetSizeDictionary())
+        {
+            newSize = new Stat((int)kvp.Value, kvp.Key);
+            statList.Add(newSize);
+        }
+        return statList;
+    }
 }

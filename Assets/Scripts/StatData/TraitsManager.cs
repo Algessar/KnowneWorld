@@ -33,53 +33,53 @@ public class TraitsManager : MonoBehaviour
 
         
     }
-    public void CalculateRaceModifiers(Character character, CharacterRace characterRace, int size) //This method should only add the enums to the characters lists.
-    {
-        _traitsEnumList.Clear();
-        
-        switch (characterRace)
-        {
-            case CharacterRace.DWARF:
-                character._sizeEnum = Size.MEDIUM;
-                character._size += DiceRoll(0, 4) + 1; //Move this to CalcSizeModifiers?
-                character._characterTraits.AddRange(new[] { Traits.STOUT, Traits.BRAWN, Traits.STALWART });
-                Debug.Log("added Trait: " + _traitsEnum);
-
-                //_traitsEnum = Traits.BRAWN;
-                //_traitsEnum = Traits.STALWART;
-                break;
-            case CharacterRace.ELF:
-                size += DiceRoll(0, 6) + 2;
-                character._sizeEnum = Size.MEDIUM;
-                character._characterTraits.AddRange(new[] { Traits.VIGILANT, Traits.NIMBLE });
-
-                break;
-            case CharacterRace.HUMAN:
-                size += DiceRoll(0, 6) + 4;
-                character._sizeEnum = Size.MEDIUM;
-                character._characterTraits.AddRange(new[] { Traits.CLEVER, Traits.IRONMIND });
-
-                break;
-            case CharacterRace.HALFLING:
-                size -= DiceRoll(0, 4) + 2;
-                character._sizeEnum = Size.SMALL;
-                character._characterTraits.AddRange(new[] { Traits.NIMBLE, Traits.OBSERVANT, });
-
-                break;
-            case CharacterRace.GNOME:
-                size -= DiceRoll(0, 4) - 2;
-                character._characterTraits.AddRange(new[] { Traits.CLEVER, Traits.INGENIOUS });
-                character._sizeEnum = Size.TINY;
-
-                break;
-            case CharacterRace.GOBLIN:
-                size -= DiceRoll(0, 4) - 1;
-                character._characterTraits.AddRange(new[] { Traits.NIMBLE, Traits.INGENIOUS });
-                character._sizeEnum = Size.SMALL;
-                break;
-        }
-
-    }
+   // public void CalculateRaceModifiers(Character character, CharacterRace characterRace, int size) //This method should only add the enums to the characters lists.
+   // {
+   //     _traitsEnumList.Clear();
+   //     
+   //     switch (characterRace)
+   //     {
+   //         case CharacterRace.DWARF:
+   //             character._sizeEnum = Size.MEDIUM;
+   //             character._size += DiceRoll(0, 4) + 1; //Move this to CalcSizeModifiers?
+   //             character._characterTraits.AddRange(new[] { Traits.STOUT, Traits.BRAWN, Traits.STALWART });
+   //             Debug.Log("added Trait: " + _traitsEnum);
+   //
+   //             //_traitsEnum = Traits.BRAWN;
+   //             //_traitsEnum = Traits.STALWART;
+   //             break;
+   //         case CharacterRace.ELF:
+   //             size += DiceRoll(0, 6) + 2;
+   //             character._sizeEnum = Size.MEDIUM;
+   //             character._characterTraits.AddRange(new[] { Traits.VIGILANT, Traits.NIMBLE });
+   //
+   //             break;
+   //         case CharacterRace.HUMAN:
+   //             size += DiceRoll(0, 6) + 4;
+   //             character._sizeEnum = Size.MEDIUM;
+   //             character._characterTraits.AddRange(new[] { Traits.CLEVER, Traits.IRONMIND });
+   //
+   //             break;
+   //         case CharacterRace.HALFLING:
+   //             size -= DiceRoll(0, 4) + 2;
+   //             character._sizeEnum = Size.SMALL;
+   //             character._characterTraits.AddRange(new[] { Traits.NIMBLE, Traits.OBSERVANT, });
+   //
+   //             break;
+   //         case CharacterRace.GNOME:
+   //             size -= DiceRoll(0, 4) - 2;
+   //             character._characterTraits.AddRange(new[] { Traits.CLEVER, Traits.INGENIOUS });
+   //             character._sizeEnum = Size.TINY;
+   //
+   //             break;
+   //         case CharacterRace.GOBLIN:
+   //             size -= DiceRoll(0, 4) - 1;
+   //             character._characterTraits.AddRange(new[] { Traits.NIMBLE, Traits.INGENIOUS });
+   //             character._sizeEnum = Size.SMALL;
+   //             break;
+   //     }
+   //
+   // }
     public void CalculateSizeModifiers( Size sizeEnum, int bonusDamageMod, int walkDistanceMod )
     {
         switch (sizeEnum)
@@ -118,7 +118,7 @@ public class TraitsManager : MonoBehaviour
         {
             if (trait == Traits.BRAWN) { character.IncrementStat("Strength", 1); }
             if (trait == Traits.CLEVER) { character.IncrementStat("Intellect", 1); }
-            if (trait == Traits.DIMINUTIVE) { character._size -= 2; }
+            if (trait == Traits.DIMINUTIVE) { character._size -= 2; } // TODO: This needs looking over
             if (trait == Traits.IRONMIND) { character.IncrementStat("Will", 1); }
             if (trait == Traits.NIMBLE) { character.IncrementStat("Agility", 1); }
             if (trait == Traits.INGENIOUS) { }

@@ -6,11 +6,8 @@ public static class DiceRoller
     {
         return random.Next(minValue, maxValue + 1);
     }
-
     public static int RollDice( int _arcpower )
     {
         return Roll(1, _arcpower + 1);
     }
-
-
 }

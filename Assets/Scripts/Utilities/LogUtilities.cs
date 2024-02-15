@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Collections;
 using UnityEngine;
 
-public class ValueFetcher : MonoBehaviour
+public class LogUtilities
 {
     List<Stat> statList = new List<Stat>();
 
@@ -22,6 +22,15 @@ public class ValueFetcher : MonoBehaviour
         }
 
         return statValue;
+    }
+
+    public void LogNameAndValue(List<Stat> list)
+    {
+       foreach(Stat stat in list) 
+        {
+
+            Debug.Log($"List name and value: {stat.statName} : {stat.value}");
+        }
     }
 
     public void LogList<T>( List<T> list )

@@ -20,5 +20,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameMasterScene.unity
     guid: e5f322a96a7fc1d4bb373910da539d43
+  - enabled: 1
+    path: Assets/Scenes/CharacterCreation.unity
+    guid: 7223893018eb0124a884b1e305830aae
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

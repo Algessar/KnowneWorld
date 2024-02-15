@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 public class CharacterCreator : MonoBehaviour
 {
+    StatCreator _statCreator = new StatCreator();
 
     public void CreateCharacter()
     {
@@ -21,11 +23,24 @@ public class CharacterCreator : MonoBehaviour
         {
             Character _character = new Character();
             _character._name = characterName;
+            _character._characterRace = GameManager.Instance._currentlySelectedRace;
+            _character.FillArchetypeList();
             _character.OnCharacterCreated();
 
-            GameManager.Instance._listExistingCharacters.Add(_character);            
+
+            if (GameManager.Instance._listExistingCharacters.Count == 0)
+            {
+                GameManager.Instance._listExistingCharacters.Add(_character);
+            }
+            else
+            {
+                GameManager.Instance._listExistingCharacters.Clear();
+                GameManager.Instance._listExistingCharacters.Add(_character);
+            }
         }
     }
+
+
     private void SetCharacterID(Character character)
     {
         int tempID = 0;

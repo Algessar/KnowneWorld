@@ -2721,7 +2721,7 @@ GameObject:
   - component: {fileID: 724937676372762904}
   - component: {fileID: 7922167557920613995}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Old-Archetype-Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

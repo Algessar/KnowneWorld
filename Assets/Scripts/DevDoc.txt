@@ -140,13 +140,10 @@ Actions
 		
 
 
-
-TGT - targets for constraints (Like the whole DEF hierarchy targeting this layer as separation.)
-
-MCH - has constraints set on them.
-
-	How do we then handle parenting between these bones?
-
-DEF - Deforming bones. Should keep hierarchy.
-
-		
+Dropdown -
+Template - definitely matters. Total area to show Options.
+Viewport - no visible difference. May be auto sizing
+Item - Decides spacing between lines
+Item label - Text size etc
+Item background - auto sizes what it seems like
+Content - also seems to auto size

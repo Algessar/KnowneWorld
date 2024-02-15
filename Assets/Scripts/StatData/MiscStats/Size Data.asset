@@ -9,9 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f0bfb6493cd02c428fb079f46dec3fe, type: 3}
-  m_Name: Engineering
+  m_Script: {fileID: 11500000, guid: 899e149707d14514b8991ed6814de6a8, type: 3}
+  m_Name: Size Data
   m_EditorClassIdentifier: 
-  coreSkillsDictionary:
-    keys: []
-    values: 
+  sizeDictionary:
+    keys:
+    - Tiny
+    - Small
+    - Medium
+    - Large
+    - Huge
+    - Gargantuan
+    values: feffffffffffffff0000000002000000040000000a000000
