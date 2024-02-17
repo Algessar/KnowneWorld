@@ -41,6 +41,32 @@ public class StatCreator
 
         return statList;
     }
+
+    public List<Stat> TestPopulateArchetypeList( ArchTest archetypeData )
+    {
+        statList.Clear(); // Clear the list before populating it again
+
+        foreach (var kvp in archetypeData.GetArchetypeDictionary())
+        {
+            Stat newStat = new Stat((int)kvp.Value, kvp.Key);
+            statList.Add(newStat);
+        }
+
+        return statList;
+    }
+
+    public List<Stat> TestPopulateCoreList( CoreTest coreData )
+    {
+        statList.Clear(); // Clear the list before populating it again
+
+        foreach (var kvp in coreData.GetCoreDictionary())
+        {
+            Stat newStat = new Stat((int)kvp.Value, kvp.Key);
+            statList.Add(newStat);
+        }
+
+        return statList;
+    }
     public List<Stat> PopulateSizeList(Stat newSize)
     {
         var sizeData = DataManager.Instance._SOSize;

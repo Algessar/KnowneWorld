@@ -1,9 +1,75 @@
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using System.Collections.Generic;
-using System.Linq;
 
+public class ArchetypeManager : MonoBehaviour
+{
+    public List<Stat> _statList = new List<Stat>();
+    Character _character;
+    StatCreator _statCreator;
+
+    public SOArchetypeData _data;
+
+    ArchTest archetypeTest;
+
+    // Get the Name and Value of the Archetype itself.
+
+
+    private void Awake()
+    {
+        _statCreator = new StatCreator();   
+        
+    }
+    private void Start()
+    {
+        testing();
+    }
+    public void FinishedList()
+    {
+        RollArchetypeValues(_statList);
+    }
+
+    public void RollArchetypeValues( List<Stat> stat )
+    {
+
+        _statList = GetArchetypeValues();
+        foreach (Stat s in stat)
+        {
+            s.value = (int)Random.Range(4, 10); // This is wrong. This sets the Core skills.
+        }
+        _statList.AddRange(stat);
+
+        int value = 1;
+        _data._archetypeValue = value;
+    }
+
+    public List<Stat> GetArchetypeValues()
+    {
+        var statCreator = new StatCreator();
+        _statList.Clear();
+        _statList = statCreator.PopulateArchetypeList();
+        
+        var archetype = DataManager.Instance._SOArchetypes;
+        foreach (var entry in archetype)
+        {
+            entry._archetypeValue = (int)Random.Range(4, 10);
+            //value = (int)Random.Range(4, 10);  
+        }
+        return _statList;
+    }
+    public List<Stat> testing()
+    {
+        var statCreator = new StatCreator();
+        
+        _statList = statCreator.TestPopulateArchetypeList(DataManager.Instance._ArchTest);
+
+        
+        
+        return _statList;
+    }
+
+}
+
+/*
 //DEPRECATED. Now uses the same stat creation system as base stats.
 
 public class ArchetypeManager : MonoBehaviour
@@ -25,10 +91,7 @@ public class ArchetypeManager : MonoBehaviour
     private void Awake()
     {
         _gameManager = GetComponent<GameManager>();
-        SetArchetypeAndCoreSkillDicts();
-        
-        
-       
+        SetArchetypeAndCoreSkillDicts();       
     }
 
     private void Update()
@@ -266,3 +329,4 @@ public class ArchetypeManager : MonoBehaviour
     }
 }
 
+*/

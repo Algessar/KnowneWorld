@@ -79,7 +79,7 @@ public class Character : Actions, ITargetable //IUnit
     {
         if (this != null)
         {
-            Debug.Log("A character with name ´" + _name + "´ has been created.");
+            //Debug.Log("A character with name ´" + _name + "´ has been created.");
         }
         CharacterSetup();
     }
@@ -201,7 +201,7 @@ public class Character : Actions, ITargetable //IUnit
             Stat statToFind = statList.Find(stat => stat.statName == name);
             statValue = statToFind.value;
         }
-        Debug.Log("Showing stat value for " + name + ": " + statValue);
+        //Debug.Log("Showing stat value for " + name + ": " + statValue);
         return statValue;
     }
 

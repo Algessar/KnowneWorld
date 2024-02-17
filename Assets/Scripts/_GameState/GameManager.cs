@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditor.SearchService;
 
 
 //Rules of thumb: value types that I want to be able to touch as a GM should be here. Like Experience point pool.
@@ -78,6 +79,9 @@ public class GameManager : MonoBehaviour
 
     private int _gainPoint;
 
+    //testing
+    ArchTest archTest;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -90,6 +94,25 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
 
+        //var test = archTest.GetCoreSkillList();
+
+
+        //_characterSelectDisplay = GameObject.Find("");     //GameObject
+
+        #region Find objects
+
+        UnityEngine.SceneManagement.Scene scene = SceneManager.GetActiveScene();
+
+        if(scene.ToString() == _sceneCharacterCreation)
+        {
+        _raceSelectionDropdown = GameObject.Find("RaceSelection - Dropdown").GetComponent<TMP_Dropdown>();
+        _sizeSelectionDropdown = GameObject.Find("RaceSelection - Dropdown").GetComponent<TMP_Dropdown>();
+        }
+
+
+        #endregion
+
+
         _characterCreator = GetComponent<CharacterCreator>(); 
         _canvas = FindAnyObjectByType<Canvas>();
         _camera = FindAnyObjectByType<Camera>();
@@ -97,7 +120,7 @@ public class GameManager : MonoBehaviour
         _canvas.renderMode = RenderMode.ScreenSpaceCamera;
         _canvas.worldCamera = _camera;
 
-        _sizeSelectionDropdown.gameObject.SetActive(false);
+        //_sizeSelectionDropdown.gameObject.SetActive(false);
 
         _statCreator = new StatCreator();
     }
@@ -226,29 +249,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-   // public void OnSizeDropdownValueChanged(int index)
-   // {
-   //     index = _sizeSelectionDropdown.value;
-   //     string selectedSizeKey = _sizeSelectionDropdown.options[index].text;
-   //     
-   //     if (_sizeDictionary.TryGetValue(selectedSizeKey, out int selectedSizeValue))
-   //     {
-   //         // Handle the selected size value (e.g., update UI, perform actions)
-   //         //Debug.Log($"Selected Size: {selectedSizeKey} - Value: {selectedSizeValue}");
-   //
-   //         
-   //         _character._size = SetSize(selectedSizeKey, selectedSizeValue);
-   //         _sizeList = _statCreator.PopulateSizeList(_character._sizeList);
-   //         var log = new LogUtilities();
-   //         log.LogNameAndValue(_sizeList);
-   //         //SetSize(selectedSizeKey, selectedSizeValue);
-   //     }
-   //     else
-   //     {
-   //         Debug.LogWarning($"Selected size key '{selectedSizeKey}' not found in the dictionary.");
-   //     }
-   // }
-
 
     private Stat SetSize(string key, int value)
     {
@@ -258,8 +258,8 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public int IncrementCoreSkillValues( int coreSkill ){ return coreSkill += 1; }
-    public int DecrementCoreSkillValue( int coreSkill ) {  return coreSkill -= 1; }
+    public int IncrementSkillValues( int value ){ return value += 1; }
+    public int DecrementSkillValue( int value ) {  return value -= 1; }
 
     public int IncrementStat( string name, int incrementValue ) //This function does not work as expected
     {

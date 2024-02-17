@@ -10,9 +10,16 @@ public class SOArchetypeData : ScriptableObject
     public string _archetypeName;
     public int _archetypeValue;
 
+
+
     [SerializeField]
     public SerializableDictionary<string, int> archetypeDictionary = new SerializableDictionary<string, int>();
         
+    public SOArchetypeData(string name, int value) 
+    {
+        this._archetypeName = name;
+        this._archetypeValue = value;
+    }
     
     public Dictionary<string, int> GetArchetypeDictionary()
     {

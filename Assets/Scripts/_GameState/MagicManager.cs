@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SpellSystem))]
+[RequireComponent (typeof(SpellCraftingUI))]
 public class MagicManager : MonoBehaviour
 {
   

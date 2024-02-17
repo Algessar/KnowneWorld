@@ -15,7 +15,7 @@ public static class SaveSystem
         BinaryFormatter formatter = new BinaryFormatter();
         string fileName = character._name + ".saved";
         string path = Path.Combine(Application.dataPath + "/Saves/", fileName);
-        //string path = Application.dataPath + "/Saves/character.funsies";
+        //string path = Application.dataPath + "/Saves/character.saved";
 
         FileStream stream = new FileStream(path, FileMode.Create);
 
@@ -33,7 +33,7 @@ public static class SaveSystem
 
         string fileName = characterName + ".saved";
         string path = Path.Combine(Application.dataPath + "/Saves/", fileName);
-        //string path = Application.dataPath + "/Saves/character.funsies";
+        //string path = Application.dataPath + "/Saves/character.saved";
 
         if (File.Exists(path))
         {

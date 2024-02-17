@@ -2157,6 +2157,7 @@ GameObject:
   - component: {fileID: 1171071527}
   - component: {fileID: 1171071526}
   - component: {fileID: 1171071525}
+  - component: {fileID: 1171071529}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2188,7 +2189,7 @@ MonoBehaviour:
   _accountPasswordInput: {fileID: 0}
   _name: 
   _nameInputField: {fileID: 317665569}
-  _raceSelectionDropdown: {fileID: 1893722592}
+  _raceSelectionDropdown: {fileID: 0}
   _currentlySelectedRace: 0
   _sizeSelectionDropdown: {fileID: 345699038}
   _size:
@@ -2248,6 +2249,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1171071529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171071524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 287c98692f7772644994769c1134baa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _statList: []
+  _data: {fileID: 11400000, guid: 7ded78d72e3ce854d92830bad3ea6daa, type: 2}
 --- !u!1 &1175974266
 GameObject:
   m_ObjectHideFlags: 0
@@ -3519,7 +3534,7 @@ GameObject:
   - component: {fileID: 1893722593}
   - component: {fileID: 1893722592}
   m_Layer: 5
-  m_Name: RaceSelection - Dropdown (1)
+  m_Name: RaceSelection - Dropdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4087,6 +4102,34 @@ PrefabInstance:
     - target: {fileID: 751593189031999476, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027822236767783421, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
+      propertyPath: _ArchTest
+      value: 
+      objectReference: {fileID: 11400000, guid: 33b666d68e90a714bb970dbd97882979, type: 2}
+    - target: {fileID: 6027822236767783421, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
+      propertyPath: _archAlchemy
+      value: 
+      objectReference: {fileID: 11400000, guid: 7ded78d72e3ce854d92830bad3ea6daa, type: 2}
+    - target: {fileID: 6027822236767783421, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
+      propertyPath: _ArchTests.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027822236767783421, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
+      propertyPath: '_ArchTests.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 33b666d68e90a714bb970dbd97882979, type: 2}
+    - target: {fileID: 6027822236767783421, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
+      propertyPath: '_ArchTests.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: b82beade4f7c6d445af8b9360e4124a5, type: 2}
+    - target: {fileID: 6027822236767783421, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
+      propertyPath: '_ArchTests.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 0d1275770e0ea8947aace6b5ed56f4dd, type: 2}
+    - target: {fileID: 6027822236767783421, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
+      propertyPath: _SOActionData.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8312220477758930484, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
       propertyPath: m_Name

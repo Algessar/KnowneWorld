@@ -147,3 +147,19 @@ Item - Decides spacing between lines
 Item label - Text size etc
 Item background - auto sizes what it seems like
 Content - also seems to auto size
+
+
+
+
+[PREFABS]
+
+Managers
+	[GameManager
+	DataManager
+	MagicManager]
+UI
+	[Background
+	Frame
+	Back-button
+	Default grid panel]
+		

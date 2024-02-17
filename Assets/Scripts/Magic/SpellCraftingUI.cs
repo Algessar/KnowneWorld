@@ -10,7 +10,7 @@ public class SpellCraftingUI : MonoBehaviour
     SpellSystem _spellSystem;
 
     public TMP_Dropdown _effectWordDropdown;
-    public Button _addEffectButton;
+    //public Button _addEffectButton;
 
     public Dictionary<string, SOEffectWord> _effectWordDictionary;
     public List<SOEffectWord> _selectedEffectWords = new List<SOEffectWord>();
@@ -18,13 +18,19 @@ public class SpellCraftingUI : MonoBehaviour
     public TextMeshProUGUI _spellDamageText;
     public TextMeshProUGUI _displayDiceToRoll;
 
-    public GameObject[] _displaySpellIcons;
-    
+    //public GameObject[] _displaySpellIcons;
+    public List<GameObject> _spellIcons;
+    public GameObject[] _spellIconRowParent;
+
     int _spellIndex;
+    int _rowCount;
 
     private void Awake()
     {
-        _spellSystem = GetComponent<SpellSystem>();        
+        _spellSystem = GetComponent<SpellSystem>();
+        GetEffectWordSpellIconsChildren();
+        _rowCount = _spellIcons.Count;
+        _spellIndex = 0;
     }
 
     private void Update()
@@ -49,23 +55,18 @@ public class SpellCraftingUI : MonoBehaviour
 
     public void AddSelectedEffectWord()
     {
+        if (_spellIndex > _spellIcons.Count - 1)
+        {
+            return;
+        }
+
         string selectedEffectWordKey = _effectWordDropdown.options[_effectWordDropdown.value].text;
 
         if (_effectWordDictionary.TryGetValue(selectedEffectWordKey, out SOEffectWord selectedEffectWord))
-        {
-            // Check if the selected Effect Word is not already in the list
-            if (!_selectedEffectWords.Contains(selectedEffectWord))
-            {
+        {            
                 _selectedEffectWords.Add(selectedEffectWord);
-
-                // Optionally, update UI or do something with the selected Effect Word
                 Debug.Log($"Selected Effect Word: {selectedEffectWord._effectWord}");
-                DisplaySpellIcon(selectedEffectWord, _spellIndex);
-            }
-            else
-            {
-                Debug.LogWarning($"Effect Word '{selectedEffectWord._effectWord}' is already selected.");
-            }
+                DisplaySpellIcon(selectedEffectWord, _spellIndex);            
         }
         else
         {
@@ -79,50 +80,70 @@ public class SpellCraftingUI : MonoBehaviour
         CollectAndDisplaySpellDice(); // TODO: Not implemented CollectAndDisplaySpellDice()
         // I want to split up arcPower and dice amount. There would be another line of code for calculation, but let me easier display it.
     }
-
     void CollectAndDisplaySpellDice()
     {
+
+        throw new System.NotImplementedException("CollectAndDisplaySpellDice() not yet implemented");
         //Get SO list, calc total amount of die
         //Display number of dice + "D" + dieSides
         //If dieSides are not equal for all dice in the list, then separate and display with "+"
 
         //_displayDiceToRoll.text = new string( _spellDamageText.text ); // temp lololol
     }
-    private void DisplaySpellIcon( SOEffectWord selectedSpell, int index )
-    {        
-        
-        if(index < _displaySpellIcons.Length)
+
+    private void GetEffectWordSpellIconsChildren()
+    {
+        foreach (GameObject parent in _spellIconRowParent)
         {
-            //considering creating a new array or List of the currently indexed spells?
-            _displaySpellIcons[_spellIndex].SetActive(true);
-            Image imageComponent = _displaySpellIcons[_spellIndex].GetComponent<Image>();
-
-            if (imageComponent != null)
+            // Check if the parent GameObject is not null
+            if (parent != null)
             {
-                // Assign the sprite to the Image component
-                imageComponent.sprite = selectedSpell._spellIcon;
+                // Get the number of children in the parent GameObject
+                int childCount = parent.transform.childCount;
 
-                // Optionally, you can also set other properties of the Image component here
+                // Loop through each child of the parent GameObject
+                for (int i = 0; i < childCount; i++)
+                {
+                    // Get the child GameObject at index i
+                    GameObject child = parent.transform.GetChild(i).gameObject;
+
+                    // Add the child GameObject to the list
+                    _spellIcons.Add(child);
+                }
             }
             else
             {
-                Debug.LogWarning("Image component not found on the GameObject.");
+                Debug.LogWarning("Parent GameObject is null.");
             }
-            _spellIndex++;
-            Debug.Log("Index is: " + index);
+
         }
+    }
+
+    private void DisplaySpellIcon( SOEffectWord selectedSpell, int index )
+    {        
+        _spellIcons[_spellIndex].SetActive(true);
+        Image imageComponent = _spellIcons[_spellIndex].GetComponent<Image>();
+
+        if (imageComponent != null)
+        {
+            imageComponent.sprite = selectedSpell._spellIcon;
+        }
+        else
+        {
+            Debug.LogWarning("Image component not found on the GameObject.");
+        }
+        _spellIndex++;
+        Debug.Log("Index is: " + index);        
     }
 
     public void ResetSpellList()
     {
-        foreach(GameObject iconGameObject in  _displaySpellIcons)
+        foreach(GameObject iconGameObject in  _spellIcons)
         {
             iconGameObject.SetActive(false);
         }        
         _spellIndex = 0;
-        _selectedEffectWords.Clear();
-
-        
+        _selectedEffectWords.Clear();        
     }
     public void SaveSpellToSpellBook()
     {
