@@ -1615,8 +1615,12 @@ PrefabInstance:
       value: CharacterSelectDisplay
       objectReference: {fileID: 0}
     - target: {fileID: 4416073543162080029, guid: dead2e4ca299e8b46b8a556ea3689030, type: 3}
+      propertyPath: m_text
+      value: Set Arch Values
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416073543162080029, guid: dead2e4ca299e8b46b8a556ea3689030, type: 3}
       propertyPath: m_fontSize
-      value: 34.5
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 4508255013919260253, guid: dead2e4ca299e8b46b8a556ea3689030, type: 3}
       propertyPath: m_Pivot.x
@@ -1697,6 +1701,34 @@ PrefabInstance:
     - target: {fileID: 4508255013919260253, guid: dead2e4ca299e8b46b8a556ea3689030, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792012587287790873, guid: dead2e4ca299e8b46b8a556ea3689030, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792012587287790873, guid: dead2e4ca299e8b46b8a556ea3689030, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792012587287790873, guid: dead2e4ca299e8b46b8a556ea3689030, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1171071529}
+    - target: {fileID: 4792012587287790873, guid: dead2e4ca299e8b46b8a556ea3689030, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792012587287790873, guid: dead2e4ca299e8b46b8a556ea3689030, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetArchetypeFromStats
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792012587287790873, guid: dead2e4ca299e8b46b8a556ea3689030, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ArchetypeManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4792012587287790873, guid: dead2e4ca299e8b46b8a556ea3689030, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2261,8 +2293,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 287c98692f7772644994769c1134baa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _statList: []
-  _data: {fileID: 11400000, guid: 7ded78d72e3ce854d92830bad3ea6daa, type: 2}
+  _archetypeList: []
+  _coreList1: []
+  _coreList2: []
+  _coreList3: []
+  _coreList4: []
+  _coreList5: []
+  _coreList6: []
+  _coreList7: []
+  _coreList8: []
+  _coreList9: []
+  _coreList10: []
+  _coreList11: []
+  _archetypeSOList: []
+  _coreSOList: []
 --- !u!1 &1175974266
 GameObject:
   m_ObjectHideFlags: 0
@@ -4113,7 +4157,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 7ded78d72e3ce854d92830bad3ea6daa, type: 2}
     - target: {fileID: 6027822236767783421, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
       propertyPath: _ArchTests.Array.size
-      value: 3
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6027822236767783421, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
       propertyPath: '_ArchTests.Array.data[0]'
@@ -4128,9 +4172,41 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 0d1275770e0ea8947aace6b5ed56f4dd, type: 2}
     - target: {fileID: 6027822236767783421, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
+      propertyPath: '_ArchTests.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: e51b8db8466aa5947af2c03535d0707d, type: 2}
+    - target: {fileID: 6027822236767783421, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
+      propertyPath: '_ArchTests.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: cc1a93242d12ca2488672d9566914599, type: 2}
+    - target: {fileID: 6027822236767783421, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
+      propertyPath: '_ArchTests.Array.data[5]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 670d9a6c4c6ac3247beff3b9cca9c1b6, type: 2}
+    - target: {fileID: 6027822236767783421, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
+      propertyPath: '_ArchTests.Array.data[6]'
+      value: 
+      objectReference: {fileID: 11400000, guid: e4d473ed714194a41874159fd658ff26, type: 2}
+    - target: {fileID: 6027822236767783421, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
+      propertyPath: '_ArchTests.Array.data[7]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 6808a5aa34ab6a94cbe5263223d5cb14, type: 2}
+    - target: {fileID: 6027822236767783421, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
+      propertyPath: '_ArchTests.Array.data[8]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 350855597753ba140a13afefe495c53a, type: 2}
+    - target: {fileID: 6027822236767783421, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
+      propertyPath: '_ArchTests.Array.data[9]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 271bd8fce492d80408c3d474643fae86, type: 2}
+    - target: {fileID: 6027822236767783421, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
       propertyPath: _SOActionData.Array.size
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6027822236767783421, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
+      propertyPath: '_ArchTests.Array.data[10]'
+      value: 
+      objectReference: {fileID: 11400000, guid: e27d55da109b84148915dce0314a9e88, type: 2}
     - target: {fileID: 8312220477758930484, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
       propertyPath: m_Name
       value: DataManager

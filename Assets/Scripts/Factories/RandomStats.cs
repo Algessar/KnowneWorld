@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 //TODO: Write logic for making sure that it is the lowest rolled number that get's set to zero.
@@ -9,11 +10,13 @@ public class RandomStats
 {
 
     [SerializeField] private List<Stat> _rngList = new List<Stat>();
+    LogUtilities logUtilities;
 
     public List<Stat> AssignAllRandom()
     {
+        logUtilities = new LogUtilities();
         var _statCreator = new StatCreator();
-
+        _rngList.Clear();
         _rngList = new List<Stat>();  // Initialize the stats list
         _rngList = _statCreator.PopulateStatList();  // Populates the list with the amount of Stats defined in the StatSO
 
@@ -36,23 +39,16 @@ public class RandomStats
             B.Add(_rngList[randomIndex]);
             _rngList.RemoveAt(randomIndex);
         }
-        //at this point, there are 0 entries in the _rngList. 
-        
-
-        AssignintGroupA(A);
+        //at this point, there are 0 entries in the _rngList.
+        AssignIntGroupA(A);
         // 3 positive entries are put back in. total 3 in _rngList
-        AssignintGroupB(B);
+        AssignIntGroupB(B);
         // 3 negative entries put in back in, total 6 in _rngList
-        PrintListValues(_rngList);
-        
-        
         SetLowestToZero(_rngList);
         // _rngList is searched for the lowest value, which is then set to 0.
-        PrintListValues(_rngList);
 
         return _rngList;
     }
-
     void PrintListValues(List<Stat> list )
     {
         foreach (Stat stat in list)
@@ -64,8 +60,7 @@ public class RandomStats
            // Debug.Log("list count: " + list.Count);
         //}
     }
-
-    void AssignintGroupA( List<Stat> stat )
+    void AssignIntGroupA( List<Stat> stat )
     {
         foreach (Stat s in stat)
         {
@@ -73,69 +68,47 @@ public class RandomStats
         }
         _rngList.AddRange(stat);
     }
-    void AssignintGroupB( List<Stat> stat )
+    void AssignIntGroupB( List<Stat> stat )
     {
         foreach (Stat s in stat)
         {
-            s.value = (int)Random.Range(-4, -1);
+            s.value = (int)Random.Range(-4, -0);
 
         }
         _rngList.AddRange(stat);
     }
 
-    void SetLowestToZero( List<Stat> stat )
+    void SetLowestToZero( List<Stat> statList )
     {
         // Check if the list is empty
-        if (stat.Count == 0)
+        if (statList.Count == 0)
         {
             Debug.LogWarning("List is empty. Cannot set lowest value to zero.");
             return;
         }
 
-        // Find the minimum value in the list
-        int minIndex = 0;
-        int minValue = stat[0].value;
-        //Debug.Log("Min value before search: " + minValue);
-        for (int i = 1; i < stat.Count; i++)
+        List<int> intList = new List<int>();
+        int val = 0;
+        
+        foreach (Stat s in statList)
         {
-            if (stat[i].value < minValue)
+            //Add value per stat in the statList. So 6 numbers are getting added.
+            val = s.value;
+            intList.Add(val);
+        }
+
+        // Find the minimum value in the list
+        int minValue = intList.Min();
+
+        // Iterate through the statList to find the Stat object with the minimum value
+        foreach (Stat s in statList)
+        {
+            if (s.value == minValue)
             {
-                minValue = stat[i].value;
-                Debug.Log("Min value in search: " + minValue);
-                minIndex = i;
-                Debug.Log("At index: " + minIndex);
+                // Update the value of the Stat object with the minimum value to 0
+                s.value = 0;
+                break; // Once we've found and updated the minimum value, we can exit the loop
             }
         }
-        //Debug.Log("Min value just before setting to 0: " + minValue);
-
-        // Replace the lowest value with 0
-        stat[minIndex].value = 0;
-
-        Debug.Log("Lowest value set to zero." + stat[minIndex].value);
     }
 }
-
-  //  void AssignToGroupCAndSetZero( List<Stat> stat )
-  //  {
-  //      if (stat.Count == 0)
-  //      {
-  //          // Handle the case where the list is empty
-  //          return; // or some default value
-  //      }
-  //
-  //      int min = (int)stat[0].value;
-  //
-  //      for (int i = 1; i < stat.Count; i++)
-  //      {
-  //          int currentValue = (int)stat[i].value;
-  //
-  //          if (currentValue < min)
-  //          {
-  //              min = currentValue;
-  //          }
-  //          min = 0;
-  //      }
-  //      _rngList.AddRange(stat);
-  //  }
-    
-

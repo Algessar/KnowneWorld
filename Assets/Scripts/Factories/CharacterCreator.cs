@@ -8,23 +8,26 @@ using UnityEngine.UI;
 
 public class CharacterCreator : MonoBehaviour
 {
-    StatCreator _statCreator = new StatCreator();
+    //StatCreator _statCreator = new StatCreator();
+    RandomStats _randomStats = new RandomStats();
 
     public void CreateCharacter()
     {
         string tempName = "";
         string characterName = GameManager.Instance._nameInputField.text;
-        if (GameManager.Instance.CharacterNameExists(characterName) || GameManager.Instance._nameInputField.text == tempName)
+       //if (GameManager.Instance.CharacterNameExists(characterName) || GameManager.Instance._nameInputField.text == tempName)
+       //{
+       //    Debug.Log("Character with that name already exists, or you did not choose a name.");
+       //    return;
+       //}
+        //else
         {
-            Debug.Log("Character with that name already exists, or you did not choose a name.");
-            return;
-        }
-        else
-        {
+            _randomStats = new RandomStats();
             Character _character = new Character();
             _character._name = characterName;
             _character._characterRace = GameManager.Instance._currentlySelectedRace;
-            _character.FillArchetypeList();
+            _character._statList = _randomStats.AssignAllRandom();
+            //_character.FillArchetypeList();
             _character.OnCharacterCreated();
 
 

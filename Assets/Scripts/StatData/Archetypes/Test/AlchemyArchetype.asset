@@ -14,11 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coreSkillSO: {fileID: 11400000, guid: 035d9e4de62c430449c0c871646ecccc, type: 2}
   coreSkillStats:
-  - statName: Brew
+  - statName: Potion Brewing
     value: 0
   - statName: Distillation
+    value: 0
+  - statName: Identify Potion
+    value: 0
+  - statName: Transmutation
     value: 0
   archetypeDictionary:
     keys:
     - Alchemy
-    values: 00000000
+    values: 01000000

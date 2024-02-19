@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,28 +43,32 @@ public class StatCreator
         return statList;
     }
 
-    public List<Stat> TestPopulateArchetypeList( ArchTest archetypeData )
+    public List<Stat> TestPopulateArchetypeList(  List<ArchTest> list ) //ArchTest archetypeData,
     {
         statList.Clear(); // Clear the list before populating it again
 
-        foreach (var kvp in archetypeData.GetArchetypeDictionary())
+        foreach(var entry in list)
         {
-            Stat newStat = new Stat((int)kvp.Value, kvp.Key);
-            statList.Add(newStat);
-        }
+            foreach (var kvp in entry.GetArchetypeDictionary())
+            {
+                Stat newStat = new Stat((int)kvp.Value, kvp.Key);
+                statList.Add(newStat);
+            }
+        }       
 
         return statList;
     }
 
-    public List<Stat> TestPopulateCoreList( CoreTest coreData )
+    public List<Stat> TestPopulateCoreList(CoreTest coreDataList )
     {
         statList.Clear(); // Clear the list before populating it again
-
-        foreach (var kvp in coreData.GetCoreDictionary())
-        {
-            Stat newStat = new Stat((int)kvp.Value, kvp.Key);
-            statList.Add(newStat);
-        }
+        
+            foreach (var kvp in coreDataList.GetCoreDictionary())
+            {
+                Stat newStat = new Stat((int)kvp.Value, kvp.Key);
+                statList.Add(newStat);
+            }
+        
 
         return statList;
     }

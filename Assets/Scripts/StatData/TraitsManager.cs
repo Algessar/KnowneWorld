@@ -120,7 +120,7 @@ public class TraitsManager : MonoBehaviour
             if (trait == Traits.CLEVER) { character.IncrementStat("Intellect", 1); }
             if (trait == Traits.DIMINUTIVE) { character._size -= 2; } // TODO: This needs looking over
             if (trait == Traits.IRONMIND) { character.IncrementStat("Will", 1); }
-            if (trait == Traits.NIMBLE) { character.IncrementStat("Agility", 1); }
+            //if (trait == Traits.NIMBLE) { character.IncrementStat("Agility", 1); }
             if (trait == Traits.INGENIOUS) { }
             //{ character._archetypeManager._archetypes["Engineering"].Value += 7; }
             if (trait == Traits.IRONSKIN) { character._naturalArmorValue += 1; }

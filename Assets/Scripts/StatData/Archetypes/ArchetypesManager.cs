@@ -1,332 +1,186 @@
 using UnityEngine;
 using System.Collections.Generic;
+using NUnit.Framework.Interfaces;
+using NUnit.Framework;
+using Unity.VisualScripting.Antlr3.Runtime.Collections;
+
+//TODO: All this was probably unnecessary. 
 
 public class ArchetypeManager : MonoBehaviour
 {
-    public List<Stat> _statList = new List<Stat>();
+
+    public static ArchetypeManager Instance;
+    public List<Stat> _archetypeList = new List<Stat>();
+    public List<Stat> _coreList1 = new List<Stat>();
+    public List<Stat> _coreList2 = new List<Stat>();
+    public List<Stat> _coreList3 = new List<Stat>();
+    public List<Stat> _coreList4 = new List<Stat>();
+    public List<Stat> _coreList5 = new List<Stat>();
+    public List<Stat> _coreList6 = new List<Stat>();
+    public List<Stat> _coreList7 = new List<Stat>();
+    public List<Stat> _coreList8 = new List<Stat>();
+    public List<Stat> _coreList9 = new List<Stat>();
+    public List<Stat> _coreList10 = new List<Stat>();
+    public List<Stat> _coreList11 = new List<Stat>();
+
+    public List<ArchTest> _archetypeSOList = new List<ArchTest>();
+    public List<CoreTest> _coreSOList = new List<CoreTest>();
+
+    List<List<Stat>> list = new List<List<Stat>>();
+
     Character _character;
     StatCreator _statCreator;
 
-    public SOArchetypeData _data;
 
-    ArchTest archetypeTest;
-
-    // Get the Name and Value of the Archetype itself.
 
 
     private void Awake()
     {
-        _statCreator = new StatCreator();   
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+
+        _statCreator = new StatCreator();
         
     }
     private void Start()
     {
-        testing();
+        _archetypeSOList.Clear();
+        _archetypeSOList.AddRange(DataManager.Instance._ArchTests);
+        _archetypeList = testingArchetype(_archetypeList);
+
+        CoreList(_coreSOList);
+        
+        TestingCoreSkill();
+
+        //SetArchetypeFromStats();
+        //AssignArchetypeValues();
     }
-    public void FinishedList()
-    {
-        RollArchetypeValues(_statList);
-    }
-
-    public void RollArchetypeValues( List<Stat> stat )
-    {
-
-        _statList = GetArchetypeValues();
-        foreach (Stat s in stat)
-        {
-            s.value = (int)Random.Range(4, 10); // This is wrong. This sets the Core skills.
-        }
-        _statList.AddRange(stat);
-
-        int value = 1;
-        _data._archetypeValue = value;
-    }
-
-    public List<Stat> GetArchetypeValues()
+    public List<Stat> testingArchetype(List<Stat> list)
     {
         var statCreator = new StatCreator();
-        _statList.Clear();
-        _statList = statCreator.PopulateArchetypeList();
-        
-        var archetype = DataManager.Instance._SOArchetypes;
-        foreach (var entry in archetype)
+        list = new List<Stat>();
+
+        for (int i = 0; i < DataManager.Instance._ArchTests.Count; i++)
         {
-            entry._archetypeValue = (int)Random.Range(4, 10);
-            //value = (int)Random.Range(4, 10);  
-        }
-        return _statList;
+            list = statCreator.TestPopulateArchetypeList(DataManager.Instance._ArchTests);
+        }        
+        
+        return list;
     }
-    public List<Stat> testing()
+
+    public void CoreList(List<CoreTest> coreSOs)
     {
-        var statCreator = new StatCreator();
-        
-        _statList = statCreator.TestPopulateArchetypeList(DataManager.Instance._ArchTest);
+        foreach(var entry in DataManager.Instance._ArchTests)
+        {
+            coreSOs.Add(entry.coreSkillSO);
+        }
+  
+    }
+    private void TestingCoreSkill()
+    {
+        var data = DataManager.Instance._ArchTests;
 
-        
-        
-        return _statList;
+        _coreList1 = data[0].coreSkillStats;
+        _coreList2 = data[1].coreSkillStats;
+        _coreList3 = data[2].coreSkillStats;
+        _coreList4 = data[3].coreSkillStats;
+        _coreList5 = data[4].coreSkillStats;
+        _coreList6 = data[5].coreSkillStats;
+        _coreList7 = data[6].coreSkillStats;
+        _coreList8 = data[7].coreSkillStats;
+        _coreList9 = data[8].coreSkillStats;
+        _coreList10 = data[9].coreSkillStats;
+        _coreList11 = data[10].coreSkillStats;
+
     }
 
+    void AssignArchetypeValues()
+    {
+        //var data = DataManager.Instance._ArchTests;
+        foreach (Stat stat in _archetypeList)
+        {
+            string name = stat.statName;
+            //FindStatValueByName(_archetypeList, name);
+            int value = 0;//FindStatValueByName(_archetypeList, name);
+            value = Random.Range(4, 10);
+            stat.value = value;
+
+            Debug.Log(value);
+        }
+    }
+
+    public void SetArchetypeFromStats()
+    {
+        //IncrementStat(_archetypeList, "Alchemy", 5);
+        
+        //SetInitialArchetypeValue(_character._statList, "Alchemy", "Intellect", "Agility");
+    }
+
+    void IncrementStat( List<Stat> statList, string name, int incrementValue )
+    {
+        int statValue = 0;
+        foreach (Stat stat in statList)
+        {
+            Stat statToFind = statList.Find(stat => stat.statName == name);
+            statValue = statToFind.value;
+            statToFind.value = incrementValue;
+        }
+    }
+
+    public int SetInitialArchetypeValue( List<Stat> statList,string archetypeName , string baseStatName1,string baseStatName2)
+    {
+        int archValue1 = 0;
+        int archValue2 = 0;
+        foreach (Stat stat in statList)
+        {
+            Stat statToFind = statList.Find(stat => stat.statName == baseStatName1);
+            archValue1 = statToFind.value;
+            statToFind.value = archValue1;
+        }
+        foreach (Stat stat in statList)
+        {
+            Stat statToFind = statList.Find(stat => stat.statName == baseStatName2);
+            archValue1 = statToFind.value;
+            statToFind.value = archValue2;
+        }
+
+        int final = archValue1 + (archValue2 / 2);
+        return final;
+        //FindStatValueByName(statList, archetypeName);
+    }
+
+
+    public int FindStatValueByName( List<Stat> statList, string name )
+    {
+        int statValue = 0;
+        foreach (Stat stat in statList)
+        {
+            Stat statToFind = statList.Find(stat => stat.statName == name);
+            statValue = statToFind.value;
+        }
+        //Debug.Log("Showing stat value for " + name + ": " + statValue);
+        return statValue;
+    }
 }
 
 /*
-//DEPRECATED. Now uses the same stat creation system as base stats.
+ 
+[Alchemy] AGI/INT
+[Athletics] AGI/STR
+[Defence] STR/AGI
+[Engineering] INT/AGI
+[Investigation] INT/PER
+[Knowledge] INT/INT
+[Magic] INT/AGI
+[Martial] AGI/STR
+[Crafting] STR/INT
+[Survival] PER/INT
+ */
 
-public class ArchetypeManager : MonoBehaviour
-{
-    // TODO: ArchetypeManager: Make sure things are rounded correctly
-    // TODO: ArchetypeManager: 
-
-    public class Archetype
-    {
-        public string Name { get; set; }
-        public int Value { get; set; }
-        public Dictionary<string, int> CoreSkills { get; set; }
-    }
-
-    GameManager _gameManager;
-        
-    public Dictionary<string, Archetype> _archetypes = new Dictionary<string, Archetype>();
-
-    private void Awake()
-    {
-        _gameManager = GetComponent<GameManager>();
-        SetArchetypeAndCoreSkillDicts();       
-    }
-
-    private void Update()
-    {
-        var printEngineering = _archetypes["Engineering"].Value;
-       // Debug.Log("Current Engineering SV: " + printEngineering);
-    }
-    void SetArchetypeAndCoreSkillDicts()
-    {
-
-        //initialization for Archetype/Core dictionaries
-        Archetype alchemyArchetype = new Archetype
-        {
-            Name = "Alchemy",
-            Value = 0,
-            CoreSkills = new Dictionary<string, int>
-            {                
-                {"Potion Brewing", 0 },
-                {"Distillation", 0 },
-                {"Identify Potion", 0 },
-                {"Transmutation", 0 },
-                {"Herbology", 0 },
-            }
-        };
-        _archetypes["Alchemy"] = alchemyArchetype;
-
-        Archetype athleticsArchetype = new Archetype
-        {
-            Name = "Athletics",
-            Value = 0,
-            CoreSkills = new Dictionary<string, int>
-            {
-                {"Avoidance", 0 },
-                {"Jumping", 0 },
-                {"Climbing", 0 },
-                {"Sneaking", 0 },
-                {"Lifting", 0 },
-            }
-        };
-        _archetypes["Athletics"] = athleticsArchetype;
-
-        Archetype craftingArchetype = new Archetype
-        {
-            Name = "Crafting",
-            Value = 0,
-            CoreSkills = new Dictionary<string, int>
-            {
-                {"Weapons", 0 },
-                {"Armour", 0 },
-                {"Jewellery", 0 },
-                {"Carpentry", 0 },
-                {"Masonry", 0 },
-                {"Tailoring", 0 },
-                {"Brewing", 0 },
-                {"Leatherworking", 0 },
-            }
-        };
-        _archetypes["Crafting"] = craftingArchetype;
-
-        Archetype defenceArchetype = new Archetype
-        {
-            Name = "Defence",
-            Value = 0,
-            CoreSkills = new Dictionary<string, int>
-            {
-                {"Avoidance", 0 },
-                {"Blocking", 0 },
-                {"Parrying", 0 },
-                {"Maneuvers", 0 }
-            }
-        };
-        _archetypes["Defence"] = defenceArchetype;
-
-        Archetype engineeringArchetype = new Archetype
-        {
-            Name = "Engineering",
-            Value = 0,
-            CoreSkills = new Dictionary<string, int>
-            {
-                {"Automatons", 0 },
-                {"Clockwork", 0 },
-                {"Firearms", 0 },
-                {"Steam", 0 },
-            }
-        };
-        _archetypes["Engineering"] = engineeringArchetype;
-
-        Archetype investigationArchetype = new Archetype
-        {
-            Name = "Investigation",
-            Value = 0,
-            CoreSkills = new Dictionary<string, int>
-            {
-                {"Criminal Profiling", 0 },
-                {"EvidenceHandling", 0 },
-                {"Forensics", 0 },
-                {"Interrogation", 0 },
-                {"Legal", 0 },
-                {"Surveillance", 0 },
-            }
-        };
-        _archetypes["Investigation"] = investigationArchetype;
-
-        Archetype knowledgeArchetype = new Archetype
-        {
-            Name = "Knowledge",
-            Value = 0,
-            CoreSkills = new Dictionary<string, int>
-            {
-                {"Argument", 0 },
-                {"Biology", 0 },
-                {"Geology", 0 },
-                {"History", 0 },
-                {"Physics", 0 },
-                {"Reading", 0 },
-            }
-        };
-        _archetypes["Knowledge"] = knowledgeArchetype;
-
-        Archetype magicArchetype = new Archetype
-        {
-            Name = "Magic",
-            Value = 0,
-            CoreSkills = new Dictionary<string, int>
-            {
-                {"Read Magic", 0 },
-                {"Spellcasting", 0 },
-                {"Runes", 0 },
-                {"Sigils", 0 },
-            }
-        };
-        _archetypes["Magic"] = magicArchetype;
-
-        Archetype martialArchetype = new Archetype
-        {
-            Name = "Martial",
-            Value = 0,
-            CoreSkills = new Dictionary<string, int>
-            {
-                {"Swords", 0 },
-                {"Hammer", 0 },
-                {"Spears", 0 },
-                {"Bows", 0 },
-                {"Rifles", 0 },
-                {"Pistols", 0 },
-            }
-        };
-        _archetypes["Martial"] = martialArchetype;
-
-        Archetype socialArchetype = new Archetype
-        {
-            Name = "Social",
-            Value = 0,
-            CoreSkills = new Dictionary<string, int>
-            {
-                {"Deception", 0 },
-                {"Intimidation", 0 },
-                {"Dancing", 0 },
-                {"Singing", 0 },
-                {"Theatrics", 0 },
-                {"Instrument", 0 },
-            }
-        };
-        _archetypes["Social"] = socialArchetype;
-
-        Archetype survivalArchetype = new Archetype
-        {
-            Name = "Survival",
-            Value = 0,
-            CoreSkills = new Dictionary<string, int>
-            {
-                {"AnimalHandling", 0 },
-                {"Foraging", 0 },
-                {"Tracking", 0 },
-                {"Trapping", 0 },
-                {"Shelter", 0 },
-                {"Skinning", 0 },
-            }
-        };
-        _archetypes["Survival"] = survivalArchetype;
-
-        
-        
-    }
-
-    //If I need to get the names and values of all dict entries I can use this.
-    public void PrintAllArchetypesAndCoreSkills()
-    {
-        foreach (var archetypeEntry in _archetypes)
-        {
-            string archetypeName = archetypeEntry.Key;
-            Archetype archetypeData = archetypeEntry.Value;
-
-            Debug.Log($"Archetype: {archetypeName}, Archetype Value: {archetypeData.Value}");
-
-            foreach (var coreSkillEntry in archetypeData.CoreSkills)
-            {
-                string coreSkillName = coreSkillEntry.Key;
-                int coreSkillValue = coreSkillEntry.Value;
-
-                Debug.Log($"Core Skill: {coreSkillName}, Value: {coreSkillValue}");
-            }
-        }
-    }
-    public void CalculateArchetypeStartValues()
-    {
-        AddBaseStatsToArchetype(_archetypes["Alchemy"], _archetypes["Intellect"].Value, _archetypes["Agility"].Value);        
-    }
-
-    public void AddBaseStatsToArchetype(Archetype archetype, int statOne, int statTwo)
-    {
-        
-        archetype.Value = (statOne + (statTwo / 2));
-    }
-
-    public void JustForTestingValues()
-    {
-        foreach (var archetypeEntry in _archetypes)
-        {
-            string archetypeName = archetypeEntry.Key;
-            Archetype archetypeData = archetypeEntry.Value;
-
-            Debug.Log($"Archetype: {archetypeName}, Archetype Value: {archetypeData.Value}");
-
-            foreach (var coreSkillEntry in archetypeData.CoreSkills)
-            {
-                string coreSkillName = coreSkillEntry.Key;
-                int coreSkillValue = coreSkillEntry.Value;
-                coreSkillValue = 5;
-                
-
-                Debug.Log($"Core Skill: {coreSkillName}, Value: {coreSkillValue}");
-            }
-        }
-    }
-}
-
-*/

@@ -11,6 +11,7 @@ public class Character : Actions, ITargetable //IUnit
 {
     RandomStats _randomStats = new RandomStats();
     StatCreator _statCreator;
+    ArchetypeManager _archetypeManager;
 
     public string _playerName;
     public string _name;
@@ -24,7 +25,8 @@ public class Character : Actions, ITargetable //IUnit
 
     public List<Stat> _statList;
     public List<Stat> _archetypeList;
-    public List<SOArchetypeData> _archetypeDataList = new List<SOArchetypeData>();
+    public List<Stat> _coreSkillList;
+   // public List<SOArchetypeData> _archetypeDataList = new List<SOArchetypeData>();
 
     [Space (20)]
 
@@ -71,8 +73,8 @@ public class Character : Actions, ITargetable //IUnit
         this._playerName = "";
         this._name = "";       
 
-        _randomStats = new RandomStats();
-        _statCreator = new StatCreator();
+        
+        
         
     }
     public void OnCharacterCreated()
@@ -80,41 +82,60 @@ public class Character : Actions, ITargetable //IUnit
         if (this != null)
         {
             //Debug.Log("A character with name ´" + _name + "´ has been created.");
+            _randomStats = new RandomStats();
+            _statCreator = new StatCreator();
         }
         CharacterSetup();
+
+        var thing = DataManager.Instance._ArchTests[0].coreSkillStats;
+
+        foreach (var skill in DataManager.Instance._ArchTests)
+        {
+            skill.coreSkillStats = thing;
+            _coreSkillList = thing;
+        }
     }
     private void CharacterSetup()
     {
-        _statList = _randomStats.AssignAllRandom();
+        
+        
+        _archetypeManager = ArchetypeManager.Instance;
+        _archetypeList = _archetypeManager._archetypeList;
+        //_statList = new List<Stat>();
+        
         _actionList = DataManager.Instance._SOActionData;
+
+        InitArchetypes();
         //_sizeList.value = GameManager.Instance._size;        
-        MergeArchetypeLists();
+        //MergeArchetypeLists();
         //CalculateActionPoints();
 
-        int test = FindStatValueByName(_archetypeList, "Distillation");       
+        //int test = FindStatValueByName(_archetypeList, "Distillation");       
     }
 
-    public List<SOArchetypeData> FillArchetypeList()
+    void InitArchetypes()
     {
-        var Archetypes = DataManager.Instance._SOArchetypes;
-        foreach (var archetype in Archetypes)
-        {
-            _archetypeDataList.Add(archetype);
-        }        
-        return _archetypeDataList;
+
+       //ArchetypeManager.Instance.SetInitialArchetypeValue(_statList, "Alchemy", "Intellect", "Agility");
+       //ArchetypeManager.Instance.SetInitialArchetypeValue(_statList, "Athletics", "Strength", "Agility");
+       //ArchetypeManager.Instance.SetInitialArchetypeValue(_statList, "Defence", "Strength", "Agility");
+       //ArchetypeManager.Instance.SetInitialArchetypeValue(_statList, "Engineering", "Intellect", "Agility");
+       //ArchetypeManager.Instance.SetInitialArchetypeValue(_statList, "Investigation", "Intellect", "Perception");
     }
 
-    void MergeArchetypeLists()
-    {
-        _archetypeList = new List<Stat>();
-        _archetypeList.Clear(); // Clear the existing list before populating it again
 
-        foreach (var archetypeData in _archetypeDataList)
-        {
-            List<Stat> statsFromArchetype = _statCreator.PopulateArchetypeList(archetypeData);
-            _archetypeList.AddRange(statsFromArchetype);
-        }
-    }
+
+  //  void MergeArchetypeLists()
+  //  {
+  //      _archetypeList = new List<Stat>();
+  //      _archetypeList.Clear(); // Clear the existing list before populating it again
+  //
+  //      foreach (var archetypeData in _archetypeDataList)
+  //      {
+  //          List<Stat> statsFromArchetype = _statCreator.PopulateArchetypeList(archetypeData);
+  //          _archetypeList.AddRange(statsFromArchetype);
+  //      }
+  //  }
     public int CalculateActionPoints()
     {
         _actionPoints = _baselineAPR;

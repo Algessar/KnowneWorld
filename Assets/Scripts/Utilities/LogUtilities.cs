@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Collections;
 using UnityEngine;
 
+
 public class LogUtilities
 {
     List<Stat> statList = new List<Stat>();

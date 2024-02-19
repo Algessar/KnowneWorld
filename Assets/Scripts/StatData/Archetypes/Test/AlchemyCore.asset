@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coreSkillDictionary:
     keys:
-    - Potion Brewing
     - Distillation
+    - Herbology
     - Identify Potion
+    - Potion Brewing
     - Transmutation
-    values: 00000000000000000000000000000000
+    values: 0000000000000000000000000000000000000000

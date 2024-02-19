@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coreSkillDictionary:
     keys:
-    - Carpentry
     - Armouring
-    - Smithing
+    - Blacksmithing
+    - Brewing
+    - Carpentry
+    - Jewellery
+    - Leatherworking
     - Masonry
     - Tailoring
-    values: 0000000000000000000000000000000000000000
+    - Weapons
+    values: 000000000000000000000000000000000000000000000000000000000000000000000000

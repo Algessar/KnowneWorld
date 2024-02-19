@@ -28,8 +28,9 @@ public class DataManager : MonoBehaviour
 
     [HideInInspector] public SOArchetypeData _SOArchetypeData;
 
-    public SOArchetypeData[] _SOArchetypes;
+    //public SOArchetypeData[] _SOArchetypes;
     public List<ArchTest> _ArchTests = new List<ArchTest>();
+    public List<CoreTest> _CoreTests = new List<CoreTest>();
     public ArchTest _ArchTest;
 
     [Header("Skills")]

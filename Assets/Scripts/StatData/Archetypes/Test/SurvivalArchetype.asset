@@ -10,11 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5c5847cedf2b1246a148c9a9407386d, type: 3}
-  m_Name: CraftingArchetype
+  m_Name: SurvivalArchetype
   m_EditorClassIdentifier: 
-  coreSkillSO: {fileID: 11400000, guid: 791ec2335a5589940b1f0c0c321561c3, type: 2}
-  coreSkillStats: []
+  coreSkillSO: {fileID: 11400000, guid: bf21d5bfe38d4d249a6ba55ea879deda, type: 2}
+  coreSkillStats:
+  - statName: Animal Handling
+    value: 0
+  - statName: Foraging
+    value: 0
+  - statName: Tracking
+    value: 0
+  - statName: Trapping
+    value: 0
+  - statName: Shelter
+    value: 0
+  - statName: Skinning
+    value: 0
   archetypeDictionary:
     keys:
-    - Crafting
-    values: 03000000
+    - Survival
+    values: 0b000000

@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Core", menuName = "Test/TestCore")]
 public class CoreTest : ScriptableObject
 {
+    
     [SerializeField]
     public SerializableDictionary<string, int> coreSkillDictionary = new SerializableDictionary<string, int>();
 

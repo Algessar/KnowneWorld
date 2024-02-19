@@ -10,11 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5c5847cedf2b1246a148c9a9407386d, type: 3}
-  m_Name: CraftingArchetype
+  m_Name: MagicArchetype
   m_EditorClassIdentifier: 
-  coreSkillSO: {fileID: 11400000, guid: 791ec2335a5589940b1f0c0c321561c3, type: 2}
-  coreSkillStats: []
+  coreSkillSO: {fileID: 11400000, guid: e2a8dda73ccf19244bae4a6dcce2c9d7, type: 2}
+  coreSkillStats:
+  - statName: Read Magic
+    value: 0
+  - statName: Spellcasting
+    value: 0
+  - statName: Runes
+    value: 0
+  - statName: Sigils
+    value: 0
   archetypeDictionary:
     keys:
-    - Crafting
-    values: 03000000
+    - Magic
+    values: 08000000
