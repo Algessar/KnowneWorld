@@ -1720,7 +1720,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4792012587287790873, guid: dead2e4ca299e8b46b8a556ea3689030, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetArchetypeFromStats
+      value: SetInitialArchetypeValue
       objectReference: {fileID: 0}
     - target: {fileID: 4792012587287790873, guid: dead2e4ca299e8b46b8a556ea3689030, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -2293,20 +2293,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 287c98692f7772644994769c1134baa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _archetypeList: []
-  _coreList1: []
-  _coreList2: []
-  _coreList3: []
-  _coreList4: []
-  _coreList5: []
-  _coreList6: []
-  _coreList7: []
-  _coreList8: []
-  _coreList9: []
-  _coreList10: []
-  _coreList11: []
-  _archetypeSOList: []
-  _coreSOList: []
 --- !u!1 &1175974266
 GameObject:
   m_ObjectHideFlags: 0
@@ -4152,9 +4138,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 33b666d68e90a714bb970dbd97882979, type: 2}
     - target: {fileID: 6027822236767783421, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
+      propertyPath: _CoreSkills
+      value: 
+      objectReference: {fileID: 11400000, guid: b3101b30decb8d74e98efdaeac2fc29a, type: 2}
+    - target: {fileID: 6027822236767783421, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
+      propertyPath: _SOCoreData
+      value: 
+      objectReference: {fileID: 11400000, guid: b3101b30decb8d74e98efdaeac2fc29a, type: 2}
+    - target: {fileID: 6027822236767783421, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
       propertyPath: _archAlchemy
       value: 
       objectReference: {fileID: 11400000, guid: 7ded78d72e3ce854d92830bad3ea6daa, type: 2}
+    - target: {fileID: 6027822236767783421, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
+      propertyPath: _SOArchetypeData
+      value: 
+      objectReference: {fileID: 11400000, guid: 4a3669928b79e3b42bfcba38ac4ba790, type: 2}
     - target: {fileID: 6027822236767783421, guid: 7ce9f87f6e802f542b314661c8426942, type: 3}
       propertyPath: _ArchTests.Array.size
       value: 11

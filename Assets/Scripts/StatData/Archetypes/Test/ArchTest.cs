@@ -24,24 +24,24 @@ public class ArchTest : ScriptableObject
         return dictionary;
     }
 
-    private void Awake()
-    {
-        //coreSkillStats.AddRange(GetCoreSkillList());
-        coreSkillStats = GetCoreSkillList();
-        
-    }
+  //  private void Awake()
+  //  {
+  //      //coreSkillStats.AddRange(GetCoreSkillList());
+  //      coreSkillStats = GetCoreSkillList();
+  //      
+  //  }
 
-    public List<Stat> GetCoreSkillList()
-    {
-        //coreSkillSO = CreateInstance<CoreTest>();
-        //Get the CoreSO
-        //coreSkillStats.Clear();
-        var statCreator = new StatCreator();
-       // coreSkillStats = new List<Stat>();
-        coreSkillStats = statCreator.TestPopulateCoreList(coreSkillSO);
-        
-        return coreSkillStats;
-    }
+  //  public List<Stat> GetCoreSkillList()
+  //  {
+  //      //coreSkillSO = CreateInstance<CoreTest>();
+  //      //Get the CoreSO
+  //      //coreSkillStats.Clear();
+  //      var statCreator = new StatCreator();
+  //     // coreSkillStats = new List<Stat>();
+  //      coreSkillStats = statCreator.TestPopulateCoreList(coreSkillSO);
+  //      
+  //      return coreSkillStats;
+  //  }
 
  
 }

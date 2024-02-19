@@ -87,20 +87,14 @@ public class Character : Actions, ITargetable //IUnit
         }
         CharacterSetup();
 
-        var thing = DataManager.Instance._ArchTests[0].coreSkillStats;
-
-        foreach (var skill in DataManager.Instance._ArchTests)
-        {
-            skill.coreSkillStats = thing;
-            _coreSkillList = thing;
-        }
+       
     }
     private void CharacterSetup()
     {
         
         
         _archetypeManager = ArchetypeManager.Instance;
-        _archetypeList = _archetypeManager._archetypeList;
+        //_archetypeList = _archetypeManager._archetypeList;
         //_statList = new List<Stat>();
         
         _actionList = DataManager.Instance._SOActionData;

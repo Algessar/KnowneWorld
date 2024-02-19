@@ -18,7 +18,7 @@ public class RandomStats
         var _statCreator = new StatCreator();
         _rngList.Clear();
         _rngList = new List<Stat>();  // Initialize the stats list
-        _rngList = _statCreator.PopulateStatList();  // Populates the list with the amount of Stats defined in the StatSO
+        _rngList = _statCreator.PopulateStatList(DataManager.Instance._SOStatData);  // Populates the list with the amount of Stats defined in the StatSO
 
         List<Stat> A = new List<Stat>();
         List<Stat> B = new List<Stat>();
@@ -96,7 +96,6 @@ public class RandomStats
             val = s.value;
             intList.Add(val);
         }
-
         // Find the minimum value in the list
         int minValue = intList.Min();
 
@@ -105,7 +104,7 @@ public class RandomStats
         {
             if (s.value == minValue)
             {
-                // Update the value of the Stat object with the minimum value to 0
+                // Set lowest base stat attribute to 0, to smooth out the distribution
                 s.value = 0;
                 break; // Once we've found and updated the minimum value, we can exit the loop
             }

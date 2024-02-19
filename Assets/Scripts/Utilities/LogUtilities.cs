@@ -26,7 +26,7 @@ public class LogUtilities
     }
 
     public void LogNameAndValue(List<Stat> list)
-    {
+    {        
        foreach(Stat stat in list) 
         {
 

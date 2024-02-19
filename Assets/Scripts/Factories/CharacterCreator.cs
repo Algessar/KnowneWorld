@@ -29,6 +29,7 @@ public class CharacterCreator : MonoBehaviour
             _character._statList = _randomStats.AssignAllRandom();
             //_character.FillArchetypeList();
             _character.OnCharacterCreated();
+            //_character._archetypeList = ArchetypeManager.Instance.SetInitialArchetypeValue();
 
 
             if (GameManager.Instance._listExistingCharacters.Count == 0)

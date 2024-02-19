@@ -26,12 +26,13 @@ public class DataManager : MonoBehaviour
     public SOSize _SOSize;
     public List<SOSize> _SOSizeList;
 
-    [HideInInspector] public SOArchetypeData _SOArchetypeData;
+    public SOStatData _SOArchetypeData;
+    public SOStatData _SOCoreData;
 
-    //public SOArchetypeData[] _SOArchetypes;
-    public List<ArchTest> _ArchTests = new List<ArchTest>();
-    public List<CoreTest> _CoreTests = new List<CoreTest>();
-    public ArchTest _ArchTest;
+   // //public SOArchetypeData[] _SOArchetypes;
+   // [HideInInspector] public List<ArchTest> _ArchTests = new List<ArchTest>();
+   // [HideInInspector] public List<CoreTest> _CoreTests = new List<CoreTest>();
+   // [HideInInspector] public ArchTest _ArchTest;
 
     [Header("Skills")]
     public List<SOActions>  _SOActionData = new List<SOActions>();
