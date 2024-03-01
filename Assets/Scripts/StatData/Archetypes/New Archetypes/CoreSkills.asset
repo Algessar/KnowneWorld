@@ -24,7 +24,6 @@ MonoBehaviour:
     - Jumping
     - Lifting
     - Sneaking
-    - Weapons
     - Armouring
     - Blacksmithing
     - Brewing
@@ -33,6 +32,7 @@ MonoBehaviour:
     - Leatherworking
     - Masonry
     - Tailoring
+    - Weapons
     - Blocking
     - Dodging
     - Maneuvers
@@ -58,7 +58,7 @@ MonoBehaviour:
     - Spellcasting
     - Runes
     - Sigils
-    - Bpws
+    - Bows
     - Hammers
     - Rifles
     - Pistols
@@ -66,8 +66,8 @@ MonoBehaviour:
     - Swords
     - Dancing
     - Deception
+    - Instrument
     - Intimidation
     - Singing
     - Theatrics
-    - Instrument
     values: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000

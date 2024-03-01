@@ -1,6 +1,7 @@
 using System.IO;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
+using System;
 
 [System.Serializable]
 public static class SaveSystem
@@ -23,7 +24,7 @@ public static class SaveSystem
 
         formatter.Serialize(stream, data);
         stream.Close();
-
+                
         //Perhaps possible to put all the saved file in a list somewhere?
 
     }
@@ -50,6 +51,50 @@ public static class SaveSystem
             Debug.Log("Save file not found in " + path);
 
             return null;
+        }
+    }
+
+    public static void Save<T>( T obj, string fileName, int ID = 0 ) where T : class
+    {
+        string path = Path.Combine(Application.dataPath, "/Saves/", fileName + ".saved");
+        string path2 = Path.Combine(Application.dataPath, "/Saves/", ID + ".saved");
+
+        try
+        {
+            using (FileStream stream = new FileStream(path, FileMode.Create))
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(stream, obj);
+
+                stream.Close();
+            }
+
+            Debug.Log("Object saved successfully to: " + path);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Failed to save object: " + e.Message);
+        }        
+    }
+
+    public static void Load<T>( string fileName, int ID = 0 ) where T : class
+    {
+        string path = Path.Combine(Application.dataPath + "/Saves/", fileName);
+        //string path = Application.dataPath + "/Saves/character.saved";
+
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            PlayerData data = formatter.Deserialize(stream) as PlayerData;
+            stream.Close();
+            
+        }
+        else
+        {
+            Debug.Log("Save file not found in " + path);
+           
         }
     }
 }

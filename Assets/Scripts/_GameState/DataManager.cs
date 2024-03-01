@@ -148,3 +148,5 @@ public enum EquipmentType
     RING,
     NECKLACE,
 }
+
+

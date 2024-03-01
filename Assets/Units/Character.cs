@@ -59,7 +59,8 @@ public class Character : Actions, ITargetable //IUnit
     public CharacterRace _characterRace;
 
     public int _size;
-    public List<Stat> _sizeList = new List<Stat>();
+    public Size _sizeEnum;
+    //public List<Stat> _sizeList = new List<Stat>();
     public List<Traits> _characterTraits = new List<Traits>();
 
     [Header("Inventory")]
@@ -68,14 +69,43 @@ public class Character : Actions, ITargetable //IUnit
 
     [Header("UI")]
     public GameObject _characterPortrait; //gameObject.GetComponent<Image>();
-    public Character( )
-    {
-        this._playerName = "";
-        this._name = "";       
 
-        
-        
-        
+    public void LoadFromPlayerData( PlayerData playerData )
+    {
+        this._name = playerData._name;
+
+        this._currentHealth = playerData._health;
+        this._minHealth = playerData._minHealth;
+        this._maxHealth = playerData._maxHealth;
+
+
+        _energy = playerData._energy;
+        _maxWalkDistance = playerData._maxWalkDistance;
+
+
+        this._statList = new List<Stat>(playerData._savedStatList);
+        this._archetypeList = playerData._archetypeList;
+        this._coreSkillList = playerData._coreSkillList;
+
+
+        _actionPoints = playerData._actionPoints;
+        _initiative = playerData._initiative;
+
+        _totalDamage = playerData._totalDamage;
+        _bonusDamageMod = playerData._bonusDamageMod;
+
+        _armourValue = playerData._armourValue;
+        _naturalArmorValue = playerData._naturalArmorValue;
+        _magicalProtection = playerData._magicalProtection;
+
+        _characterRace = playerData._characterRace;
+
+        _size = playerData._size;
+        //_sizeList = playerData._sizeList;
+        _characterTraits = playerData._characterTraits;
+
+        //_itemsInInventory = playerData._itemsInInventory;
+        //_equippedItems = playerData._equippedItems;
     }
     public void OnCharacterCreated()
     {
@@ -92,7 +122,8 @@ public class Character : Actions, ITargetable //IUnit
     private void CharacterSetup()
     {
         
-        
+       // this._name = GameObject.Find("GameManager").GetComponent<CharacterCreator>()._character._name;
+
         _archetypeManager = ArchetypeManager.Instance;
         //_archetypeList = _archetypeManager._archetypeList;
         //_statList = new List<Stat>();

@@ -10,6 +10,7 @@ public class CharacterCreator : MonoBehaviour
 {
     //StatCreator _statCreator = new StatCreator();
     RandomStats _randomStats = new RandomStats();
+    public Character _character;
 
     public void CreateCharacter()
     {
@@ -23,7 +24,8 @@ public class CharacterCreator : MonoBehaviour
         //else
         {
             _randomStats = new RandomStats();
-            Character _character = new Character();
+            _character = new Character();
+            //Instantiate(_character);
             _character._name = characterName;
             _character._characterRace = GameManager.Instance._currentlySelectedRace;
             _character._statList = _randomStats.AssignAllRandom();
@@ -42,6 +44,7 @@ public class CharacterCreator : MonoBehaviour
                 GameManager.Instance._listExistingCharacters.Add(_character);
             }
         }
+        GameManager.Instance._character = this._character;
     }
 
 

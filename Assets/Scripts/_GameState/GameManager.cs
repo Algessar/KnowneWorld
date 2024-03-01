@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     StatCreator _statCreator;
     CharacterCreator _characterCreator;
-    private Character _character;
+    public Character _character;
 
     [Header("Scene managment")]
 
@@ -75,9 +75,13 @@ public class GameManager : MonoBehaviour
     public GameObject _characterSelectDisplay;
     public Transform _textParent;
     public List<Character> _listExistingCharacters = new List<Character>();
-
+    public List<PlayerData> playerDatas = new List<PlayerData>();
 
     private int _gainPoint;
+
+
+    private List<string> _characterNames = new List<string>();
+
 
     //testing
     ArchTest archTest;
@@ -94,29 +98,18 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
 
-        //var test = archTest.GetCoreSkillList();
-
-
-        //_characterSelectDisplay = GameObject.Find("");     //GameObject
-
-        #region Find objects
-
-        UnityEngine.SceneManagement.Scene scene = SceneManager.GetActiveScene();
-
-        if(scene.ToString() == _sceneCharacterCreation)
-        {
-        _raceSelectionDropdown = GameObject.Find("RaceSelection - Dropdown").GetComponent<TMP_Dropdown>();
-        _sizeSelectionDropdown = GameObject.Find("RaceSelection - Dropdown").GetComponent<TMP_Dropdown>();
-        }
-
-
-        #endregion
-
+        //GameManagerSetup();
 
         _characterCreator = GetComponent<CharacterCreator>(); 
         _canvas = FindAnyObjectByType<Canvas>();
         _camera = FindAnyObjectByType<Camera>();
+        UnityEngine.SceneManagement.Scene scene = SceneManager.GetActiveScene();
 
+        if (scene.ToString() == _sceneCharacterCreation)
+        {
+            _raceSelectionDropdown = GameObject.Find("RaceSelection - Dropdown").GetComponent<TMP_Dropdown>();
+            _sizeSelectionDropdown = GameObject.Find("RaceSelection - Dropdown").GetComponent<TMP_Dropdown>();
+        }
         _canvas.renderMode = RenderMode.ScreenSpaceCamera;
         _canvas.worldCamera = _camera;
 
@@ -124,16 +117,17 @@ public class GameManager : MonoBehaviour
 
         _statCreator = new StatCreator();
     }
-
     private void GameManagerSetup()
     {
+        #region Find objects
+
+
+        
+        #endregion
         _characterSelectDisplay = GameObject.Find("");
         _dealDamageInput.HasDescriptor();
         //_dealDamageInput = GameObject.Find("");
-        
-
     }
-
     private void Start()
     {
         if (_sizeSelectionDropdown != null)
@@ -161,15 +155,11 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogWarning("Race Selection Dropdown Is Not Assigned");
         }
-
     }
     private void Update()
     {
         //OnSizeDropdownValueChanged();
     }
-
-
-
     public void DisplayCharacterList()
     {
         foreach (Transform child in _textParent)
@@ -191,12 +181,10 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-
     public void CreateNewCharacter()
     {
         _characterCreator.CreateCharacter();
     }
-
     public void SelectRace()
     {
         if(_raceSelectionDropdown != null)
@@ -216,10 +204,7 @@ public class GameManager : MonoBehaviour
         _raceSelectionDropdown.AddOptions(data);
         
         //OnRaceDropdownValueChanged(0);
-        
-
     }
-
     public void OnRaceDropdownValueChanged()
     {
         string selectedText = _raceSelectionDropdown.options[_raceSelectionDropdown.value].text;
@@ -233,31 +218,21 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.LogWarning("Failed to parse selected race: " + selectedText);
-        }
-
-        
+        }        
     }
-
     public void SetSizeDictionary(Dictionary<string, int> dictionary )
     {
         _sizeDictionary = dictionary;
-
         
         _sizeSelectionDropdown.ClearOptions();
-        _sizeSelectionDropdown.AddOptions(new List<string>(_sizeDictionary.Keys));       
-        
-
+        _sizeSelectionDropdown.AddOptions(new List<string>(_sizeDictionary.Keys));
     }
-
-
     private Stat SetSize(string key, int value)
     {
         _size.statName = key;
         _size.value = value;
         return _size;
     }
-
-
     public int IncrementSkillValues( int value ){ return value += 1; }
     public int DecrementSkillValue( int value ) {  return value -= 1; }
 
@@ -286,6 +261,58 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    #region save and load
+
+    public void SaveCharacter()
+    {
+        SaveSystem.SaveCharacter(_character);
+        Debug.Log("attempting to save " + _nameInputField.text);
+
+
+    }
+
+
+
+    public void LoadCharacter()
+    {
+       //Character _character = new Character();
+       //var character = new PlayerData(_character);
+       //character = SaveSystem.LoadCharacter(_nameInputField.text);
+       //
+       //playerDatas.Add( character );
+
+        PlayerData loadedData = SaveSystem.LoadCharacter(_nameInputField.text);
+
+        if ( loadedData != null ) 
+        {
+            Character loadedCharacter = new Character();
+            loadedCharacter.LoadFromPlayerData( loadedData );
+
+            _listExistingCharacters.Add(loadedCharacter);
+        }
+
+        // I need some kind of object that can call LoadCharacter with the character name.
+        // Which means what? _nameInputField.text is ofc a placeholder. How do I pass in the name I want?
+        // Maybe just use a list somehow? Save all the names in a list, pass that into a function which calls LoadCharacter with that name passed in.
+
+        var name = _listExistingCharacters[0]._name;
+
+        foreach ( var character in _listExistingCharacters )
+        {
+            _characterNames.Add(character._name);
+        }
+
+    }
+
+    public void DeleteCharacter()
+    {
+
+        _listExistingCharacters.Clear();
+        _character = null;
+    }
+
+    #endregion
+
     #region Scene/Login Management
 
     public void ToLoginScene()
@@ -311,15 +338,11 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("LOGIN was pressed");
         if (_accountNameInput.text == "Test" && _accountPasswordInput.text == "Test")
-        {
-            
-            
+        {            
             Debug.Log("Login was pressed and should change scene");
-            SceneManager.LoadScene(_scenePlayer);
-            
+            SceneManager.LoadScene(_scenePlayer);            
         }
     }
-
     public void ToWelcomeScene()
     {
         SceneManager.LoadScene(_sceneWelcomeScreen);

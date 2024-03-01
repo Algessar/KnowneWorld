@@ -83,7 +83,7 @@ public class SpellCraftingUI : MonoBehaviour
     void CollectAndDisplaySpellDice()
     {
 
-        throw new System.NotImplementedException("CollectAndDisplaySpellDice() not yet implemented");
+        //throw new System.NotImplementedException("CollectAndDisplaySpellDice() not yet implemented");
         //Get SO list, calc total amount of die
         //Display number of dice + "D" + dieSides
         //If dieSides are not equal for all dice in the list, then separate and display with "+"

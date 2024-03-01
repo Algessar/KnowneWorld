@@ -10,4 +10,14 @@ public static class DiceRoller
     {
         return Roll(1, _arcpower + 1);
     }
+
+    public static int DicePool(int minValue, int maxValue, int diceAmount)
+    {
+        for (int i = 0; i < diceAmount; i++)
+        {
+            random.Next(minValue, maxValue);
+        }
+
+        return random.Next();
+    }
 }
