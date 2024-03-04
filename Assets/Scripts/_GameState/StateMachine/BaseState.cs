@@ -5,18 +5,18 @@
     protected readonly CombatManager combatManager;
 
 
-    public void OnEnter()
+    public virtual void OnEnter()
     {
-        throw new System.NotImplementedException();
+        // noop
     }
 
-    public void OnExit()
+    public virtual void OnExit()
     {
-        throw new System.NotImplementedException();
+        // noop
     }
 
-    public void Update()
+    public virtual void Update()
     {
-        throw new System.NotImplementedException();
+        // noop
     }
 }

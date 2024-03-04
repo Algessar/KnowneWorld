@@ -778,6 +778,7 @@ GameObject:
   - component: {fileID: 577590440}
   - component: {fileID: 577590441}
   - component: {fileID: 577590442}
+  - component: {fileID: 577590443}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -936,16 +937,66 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f6337612e4bee641b7d4f4c605e538d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemy: {fileID: 0}
+  _character:
+    _playerName: 
+    _name: 
+    _playerID: 0
+    _characterID: 0
+    _currentHealth: 0
+    _minHealth: 0
+    _maxHealth: 100
+    _statList: []
+    _archetypeList: []
+    _coreSkillList: []
+    _actionPoints: 0
+    _initiative: 0
+    _energy: 0
+    _maxWalkDistance: 0
+    _totalDamage: 0
+    _bonusDamageMod: 0
+    _armourValue: 0
+    _naturalArmorValue: 0
+    _magicalProtection: 0
+    _characterRace: 0
+    _size: 0
+    _sizeEnum: 0
+    _characterTraits: 
+    _itemsInInventory: []
+    _equippedItems: []
+    _characterPortrait: {fileID: 0}
   _playerHealth: 10
+  _playerActionsMin: 0
   _playerActions: 3
-  _enemyHealth: 10
-  _enemyActions: 3
-  _enemyActionsMax: 3
+  _playerActionsMax: 3
+  _actionRegen: 2
+  _playerDamage: 1
   GAMESTATE: 0
+  _switchState: 0
+  _isDefeated: 0
+  _isVictorious: 0
   _playerHealthText: {fileID: 1726457851}
   _enemyHealthText: {fileID: 1716223733}
   _playerActionsText: {fileID: 1092689593}
   _enemyActionsText: {fileID: 1571818994}
+--- !u!114 &577590443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577590435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48fe726511cc5c14fb666961e7169315, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyHealth: 10
+  _enemyActionsMin: 0
+  _enemyActions: 3
+  _enemyActionsMax: 3
+  _enemyDamage: 1
+  _actionRegen: 2
 --- !u!224 &587540871 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1948197840272845083, guid: 1c792308a3afec540af5c2b75a597ce5, type: 3}
@@ -2783,7 +2834,7 @@ PrefabInstance:
       objectReference: {fileID: 577590442}
     - target: {fileID: 7000193058920084499, guid: 1c792308a3afec540af5c2b75a597ce5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: EndPlayerTurnButton
+      value: SwitchState
       objectReference: {fileID: 0}
     - target: {fileID: 7000193058920084499, guid: 1c792308a3afec540af5c2b75a597ce5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

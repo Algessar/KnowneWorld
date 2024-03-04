@@ -1,4 +1,4 @@
-﻿public interface Ipredicate
+﻿public interface IPredicate
 {
     bool Evaluate();
 }

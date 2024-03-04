@@ -2,9 +2,9 @@
 {
     public IState To { get; }
 
-    public Ipredicate Condition { get; }
+    public IPredicate Condition { get; }
 
-    public Transition(IState to, Ipredicate condition )
+    public Transition(IState to, IPredicate condition )
     {
         To = to;
         Condition = condition;

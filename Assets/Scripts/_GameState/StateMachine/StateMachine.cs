@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 
 public class StateMachine
 {
@@ -16,15 +17,12 @@ public class StateMachine
 
             current.State?.Update();
         }
-
     }
-
     public void SetState(IState state)
     {
         current = nodes[state.GetType()];
         current.State?.OnEnter();
     }
-
     void ChangeState(IState state )
     {
         if(state == current.State)
@@ -38,9 +36,7 @@ public class StateMachine
         previousState?.OnExit();
         nextState?.OnEnter();
         current = nodes[state.GetType()];
-
     }
-
     ITransition GetTransition()
     {
         foreach (var transition in anyTransitions)        
@@ -52,20 +48,16 @@ public class StateMachine
             if(transition.Condition.Evaluate())
              return transition;
 
-        return null;
-        
+        return null;        
     }
-
-    public void AddTransition(IState from, IState to, Ipredicate condition )
+    public void AddTransition(IState from, IState to, IPredicate condition )
     {
         GetOrAddNode(from).AddTransition(GetOrAddNode(to).State, condition);
     }
-
-    public void AddAnyTransition(IState to, Ipredicate condition )
+    public void AddAnyTransition(IState to, IPredicate condition )
     {
         anyTransitions.Add(new Transition(GetOrAddNode(to).State, condition));
     }
-
     StateNode GetOrAddNode(IState state )
     {
         var node = nodes.GetValueOrDefault(state.GetType());
@@ -77,9 +69,6 @@ public class StateMachine
         }
         return node;
     }
-
-
-
     class StateNode { 
         public IState State { get; }
         public HashSet<ITransition> Transitions { get; }
@@ -89,11 +78,16 @@ public class StateMachine
             Transitions = new HashSet<ITransition>();
         }
 
-        public void AddTransition(IState to, Ipredicate condition ) 
+        public void AddTransition(IState to, IPredicate condition ) 
         {
             Transitions.Add(new Transition(to, condition));
         }
+    }
 
+    public IState GetCurrentState()
+    {
+        var state = current.State;
 
+        return state;
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class FuncPredicate : Ipredicate
+public class FuncPredicate : IPredicate
 {
     readonly Func<bool> func;
 
